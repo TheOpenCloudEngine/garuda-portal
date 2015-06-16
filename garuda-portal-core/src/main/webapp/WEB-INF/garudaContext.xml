@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+
+    <import resource="applicationContext.xml"/>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:org/uengine/bss/monetization/conf/mybatis-conf.xml"></property>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.uengine.bss.monetization.dao" />
+    </bean>
+
+    <util:properties id="billing" location="classpath:org/uengine/bss/monetization/conf/billing.properties" />
+
+    <jaxrs:server id="saasCxfServer" address="/">
+        <jaxrs:serviceBeans>
+            <ref bean="appService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json"/>
+        </jaxrs:extensionMappings>
+        <jaxrs:features>
+            <cxf:logging/>
+        </jaxrs:features>
+        <jaxrs:providers>
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+        </jaxrs:providers>
+    </jaxrs:server>
+</beans>

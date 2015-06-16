@@ -11,4 +11,61 @@
     <artifactId>garuda-portal-core</artifactId>
     <packaging>war</packaging>
 
+    <repositories>
+        <repository>
+            <id>oss-rh</id>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.uengine</groupId>
+            <artifactId>processcodi</artifactId>
+            <classifier>classes</classifier>
+            <version>1.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.uengine</groupId>
+            <artifactId>processcodi</artifactId>
+            <type>war</type>
+            <version>1.1-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.uengine.cloud.garuda</groupId>
+            <artifactId>garuda-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uengine</groupId>
+            <artifactId>bss-monetization</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <overlays>
+                        <overlay>
+                            <groupId>org.uengine</groupId>
+                            <artifactId>processcodi</artifactId>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
