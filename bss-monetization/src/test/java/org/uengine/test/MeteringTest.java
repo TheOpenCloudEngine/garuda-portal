@@ -1,8 +1,8 @@
 package org.uengine.test;
 
 import junit.framework.TestCase;
-import org.uengine.metering.NoServiceAvailableException;
-import org.uengine.monetization.SampleService;
+import org.uengine.bss.metering.NoServiceAvailableException;
+import org.uengine.bss.monetization.SampleService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

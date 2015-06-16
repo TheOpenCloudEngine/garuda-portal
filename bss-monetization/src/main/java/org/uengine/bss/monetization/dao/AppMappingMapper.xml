@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.uengine.bss.monetization.dao.AppMappingMapper" >
+
+    <select id="selectAll" resultType="map">
+        select appId, comcode as accountId, planId, effectiveDate, expirationDate  from appmapping
+    </select>
+
+    <select id="select" resultType="string">
+        select planId from appmapping
+        where appId = #{appId} and comcode = #{accountId}
+        order by effectiveDate desc
+    </select>
+
+    <delete id="truncate" >
+        delete from appmapping
+        where appId = #{appId}
+    </delete>
+</mapper>

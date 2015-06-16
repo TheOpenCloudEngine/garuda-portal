@@ -8,17 +8,17 @@
       <description>Ideal for early-stage applications with smaller data volumes.Starting at 1$/mofor 11GB/day 7-day retention</description>
       <billingInterval>1</billingInterval>
       <oneTimeServiceAndRateList>
-        <org.uengine.monetization.OneTimeServiceAndRate>
+        <org.uengine.bss.monetization.OneTimeServiceAndRate>
           <service>
             <id>Setup</id>
           </service>
           <price>0.0</price>
           <unitOfMeasure>$</unitOfMeasure>
           <contractDuration>1</contractDuration>
-        </org.uengine.monetization.OneTimeServiceAndRate>
+        </org.uengine.bss.monetization.OneTimeServiceAndRate>
       </oneTimeServiceAndRateList>
       <recurringServiceAndRateList>
-        <org.uengine.monetization.RecurringServiceAndRate>
+        <org.uengine.bss.monetization.RecurringServiceAndRate>
           <service>
             <id>Basic</id>
           </service>
@@ -27,7 +27,7 @@
           <contractDuration>1</contractDuration>
           <quota>5</quota>
           <overagePrice>0.2</overagePrice>
-        </org.uengine.monetization.RecurringServiceAndRate>
+        </org.uengine.bss.monetization.RecurringServiceAndRate>
       </recurringServiceAndRateList>
       <usageServiceAndRateList/>
     </Plan>
@@ -36,17 +36,17 @@
       <description>Ideal for advance-stage applications with large data volumes.Starting at $1/mofor 1GB/day 7-day retention</description>
       <billingInterval>1</billingInterval>
       <oneTimeServiceAndRateList>
-        <org.uengine.monetization.OneTimeServiceAndRate>
+        <org.uengine.bss.monetization.OneTimeServiceAndRate>
           <service>
             <id>Setup</id>
           </service>
           <price>0.0</price>
           <unitOfMeasure>$</unitOfMeasure>
           <contractDuration>1</contractDuration>
-        </org.uengine.monetization.OneTimeServiceAndRate>
+        </org.uengine.bss.monetization.OneTimeServiceAndRate>
       </oneTimeServiceAndRateList>
       <recurringServiceAndRateList>
-        <org.uengine.monetization.RecurringServiceAndRate>
+        <org.uengine.bss.monetization.RecurringServiceAndRate>
           <service>
             <id>Basic</id>
           </service>
@@ -55,10 +55,10 @@
           <contractDuration>1</contractDuration>
           <quota>10</quota>
           <overagePrice>0.2</overagePrice>
-        </org.uengine.monetization.RecurringServiceAndRate>
+        </org.uengine.bss.monetization.RecurringServiceAndRate>
       </recurringServiceAndRateList>
       <usageServiceAndRateList>
-        <org.uengine.monetization.UsageServiceAndRate>
+        <org.uengine.bss.monetization.UsageServiceAndRate>
           <service>
             <id>Advance</id>
           </service>
@@ -67,26 +67,26 @@
           <contractDuration>1</contractDuration>
           <minQuantity>0</minQuantity>
           <maxQuantity>0</maxQuantity>
-        </org.uengine.monetization.UsageServiceAndRate>
+        </org.uengine.bss.monetization.UsageServiceAndRate>
       </usageServiceAndRateList>
     </Plan>
   </planList>
   <serviceList>
-    <org.uengine.monetization.Service>
+    <org.uengine.bss.monetization.Service>
       <id>Setup</id>
       <name>Setup</name>
       <description>We provides setting an application and fast provisioning</description>
-    </org.uengine.monetization.Service>
-    <org.uengine.monetization.Service>
+    </org.uengine.bss.monetization.Service>
+    <org.uengine.bss.monetization.Service>
       <id>Basic</id>
       <name>Basic</name>
       <description>Caculate a minimum path price from one to another</description>
-    </org.uengine.monetization.Service>
-    <org.uengine.monetization.Service>
+    </org.uengine.bss.monetization.Service>
+    <org.uengine.bss.monetization.Service>
       <id>Advance</id>
       <name>Advance</name>
       <description>Caculate a minimum path price from one to many others</description>
-    </org.uengine.monetization.Service>
+    </org.uengine.bss.monetization.Service>
   </serviceList>
   <metadataPropertyList/>
 </org.uengine.application.App>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.uengine.bss.monetization.dao.UsageStatusMapper" >
+
+    <select id="selectByPlan" resultType="org.uengine.bss.monetization.UsageStatus">
+        select * from usageStatus
+        where monthId = #{monthId}
+        and accountId = #{accountId}
+        and planId = #{planId}
+    </select>
+
+  <select id="select" resultType="org.uengine.bss.monetization.UsageStatus">
+  	select * from usageStatus
+  	where monthId = #{monthId}
+  	  and appId = #{appId}
+  	  and accountId = #{accountId}
+  	  and planId = #{planId}
+  	  and serviceId = #{serviceId}
+  </select>
+
+    <insert id="insert"  parameterType="org.uengine.bss.monetization.UsageStatus">
+        INSERT INTO usageStatus (
+            monthId, appId, accountId, planId, serviceId, `usage`, isExceed, isBlock
+        ) VALUES (
+            #{monthId}, #{appId}, #{accountId}, #{planId}, #{serviceId}, #{usage}, #{isExceed}, #{isBlock}
+        )
+    </insert>
+    <update id="update"  parameterType="org.uengine.bss.monetization.UsageStatus">
+        UPDATE usageStatus
+        SET `usage` = #{usage}, isExceed = #{isExceed}, isBlock = #{isBlock}
+        where monthId = #{monthId}
+          and appId = #{appId}
+          and accountId = #{accountId}
+          and planId = #{planId}
+          and serviceId = #{serviceId}
+    </update>
+    <delete id="truncate" >
+        delete from usageStatus
+        where appId = #{appId}
+    </delete>
+</mapper>

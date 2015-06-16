@@ -23,7 +23,7 @@
     <context:annotation-config />
     <aop:aspectj-autoproxy />
 
-    <bean class="org.uengine.metering.MeteringAdvice" />
-    <bean id="sampleService" class="org.uengine.monetization.SampleService" />
+    <bean class="org.uengine.bss.monetization.metering.MeteringAdvice" />
+    <bean id="sampleService" class="org.uengine.bss.monetization.SampleService" />
 
 </beans>

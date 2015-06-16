@@ -14,9 +14,9 @@
 		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-    <bean id="MeteringServiceScheduledJob" class="org.uengine.monetization.service.MeteringService" />
-    <bean id="CoreService" class="org.uengine.monetization.service.BillingService" />
-	<context:component-scan base-package="com.uengine.*.controller" />
+    <bean id="MeteringServiceScheduledJob" class="org.uengine.bss.monetization.service.MeteringService" />
+    <bean id="CoreService" class="org.uengine.bss.monetization.service.BillingService" />
+	<context:component-scan base-package="org.uengine.garuda.client.*.controller" />
 
     <task:annotation-driven />
 	<mvc:annotation-driven/>
