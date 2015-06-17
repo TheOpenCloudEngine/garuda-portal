@@ -3,6 +3,7 @@ package org.uengine.bss.monetization.service;
 import org.metaworks.dao.IDAO;
 import org.metaworks.dao.MetaworksDAO;
 import org.metaworks.spring.SpringConnectionFactory;
+import org.springframework.stereotype.Component;
 import org.uengine.bss.application.App;
 import org.uengine.bss.monetization.*;
 import org.uengine.bss.monetization.api.AppService;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class AppServiceImpl implements AppService {
 
 	@Autowired

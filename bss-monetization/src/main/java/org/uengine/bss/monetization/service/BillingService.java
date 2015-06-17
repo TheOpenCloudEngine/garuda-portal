@@ -1,5 +1,6 @@
 package org.uengine.bss.monetization.service;
 
+import org.springframework.stereotype.Component;
 import org.uengine.bss.application.App;
 import org.uengine.bss.monetization.BillingContext;
 import org.uengine.bss.monetization.Plan;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class BillingService {
 
     @Autowired

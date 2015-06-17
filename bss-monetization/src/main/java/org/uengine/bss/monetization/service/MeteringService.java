@@ -2,6 +2,7 @@ package org.uengine.bss.monetization.service;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.springframework.stereotype.Component;
 import org.uengine.bss.application.App;
 import org.uengine.bss.monetization.Plan;
 import org.uengine.bss.monetization.ServiceAndRate;
@@ -29,6 +30,7 @@ import java.util.Map;
  * Created by swsong on 2015. 2. 3..
  */
 
+@Component
 public class MeteringService {
     @Autowired
     private BillingService billingService;
