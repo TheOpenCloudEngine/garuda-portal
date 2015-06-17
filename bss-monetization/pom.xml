@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
+            <version>${org.springframework-version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
