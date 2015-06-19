@@ -179,14 +179,6 @@
                 </excludes>
             </resource>
             <resource>
-                <directory>${basedir}/src/main/webapp</directory>
-                <excludes>
-                    <exclude>**/*.html</exclude>
-                    <exclude>META-INF/**/*</exclude>
-                    <exclude>WEB-INF/**/*</exclude>
-                </excludes>
-            </resource>
-            <resource>
                 <directory>${basedir}/src/main/resources</directory>
             </resource>
         </resources>

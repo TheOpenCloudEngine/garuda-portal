@@ -24,7 +24,7 @@
 
     <jaxrs:server id="saasCxfServer" address="/">
         <jaxrs:serviceBeans>
-            <ref bean="appService"/>
+            <ref bean="appServiceImpl"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json"/>
