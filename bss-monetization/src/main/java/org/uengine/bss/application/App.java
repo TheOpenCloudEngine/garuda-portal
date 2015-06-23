@@ -9,6 +9,7 @@ import org.uengine.bss.monetization.face.PlanListFace;
 import org.uengine.bss.monetization.face.ServiceListFace;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,20 +100,24 @@ public class App{
     }
 
     private static File getFile(String appId) {
-        return new File(System.getenv("HOME"), appId + ".xml");
+		return new File(getHomeDirectory() + appId + ".xml");
     }
+
+    private static String getHomeDirectory(){
+        if(System.getProperty("os.name").startsWith("Windows")){
+            return System.getProperty("user.home") + File.separator;
+        }else{
+            return System.getenv("HOME") + File.separator;
+        }
+    }
+
 	@ServiceMethod(target=ServiceMethodContext.TARGET_SELF)
 	public static App load(@Payload("id") String appId) throws FileNotFoundException {
 
 		XStream xstream = new XStream();
 		xstream.autodetectAnnotations(true);
 
-        App app = null;
-        try {
-            app = (App) xstream.fromXML(new InputStreamReader(new FileInputStream(getFile(appId)), "utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+		App app = (App) xstream.fromXML(new InputStreamReader(new FileInputStream(getFile(appId)), StandardCharsets.UTF_8));
 
         // Init Plan service information.
 		List<Service> serviceList = app.getServiceList();

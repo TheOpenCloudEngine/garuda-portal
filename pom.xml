@@ -19,6 +19,9 @@
         <org.springframework-version>4.1.4.RELEASE</org.springframework-version>
         <cxf.version>3.1.0</cxf.version>
         <jackson.version>2.5.3</jackson.version>
+        <jackson.mapper.version>1.9.13</jackson.mapper.version>
+        <mybatis.version>3.2.3</mybatis.version>
+        <mybatis-spring.version>1.2.2</mybatis-spring.version>
     </properties>
 
     <dependencies>

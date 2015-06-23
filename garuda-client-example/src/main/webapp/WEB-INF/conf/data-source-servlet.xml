@@ -19,9 +19,9 @@
 		destroy-method="close">
 		<!-- Connection Info -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/sdsapp?useUnicode=true&amp;characterEncoding=UTF8&amp;useOldAliasMetadataBehavior=true" />
-		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="url" value="jdbc:mysql://27.1.244.154:3306/codi?useUnicode=true&amp;characterEncoding=UTF8&amp;useOldAliasMetadataBehavior=true" />
+		<property name="username" value="codiuser" />
+		<property name="password" value="codiuser" />
 
 		<!-- Connection Pooling DBCP -->
 		<property name="initialSize" value="5" />

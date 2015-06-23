@@ -29,5 +29,5 @@
 		</property>
 	</bean>
 	
-	<context:property-placeholder location="classpath:login.properties" />	
+	<context:property-placeholder location="classpath:login.properties" />
 </beans>
