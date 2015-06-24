@@ -28,6 +28,6 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	
+
 	<context:property-placeholder location="classpath:login.properties" />
 </beans>

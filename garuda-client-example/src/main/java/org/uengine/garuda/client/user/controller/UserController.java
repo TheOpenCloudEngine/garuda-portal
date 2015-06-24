@@ -63,25 +63,25 @@ public class UserController {
 		return "main";
 	}
 	
-	@RequestMapping("/subscribe1")
-	public String subscribe1(Model model){
+	@RequestMapping("/signUpStep1")
+	public String signUpStep1(Model model){
 		model.addAttribute("appId", appId);
 		model.addAttribute("domain", domain);
-		return "subscribe1";
+		return "signUpStep1";
 	}
 	
-	@RequestMapping("/subscribe2")
-	public String subscribe2(String planId, Model model){
+	@RequestMapping("/signUpStep2")
+	public String signUpStep2(String planId, Model model){
 		model.addAttribute("appId", appId);
 		model.addAttribute("domain", domain);
 		model.addAttribute("planId", planId);
-		return "subscribe2";
+		return "signUpStep2";
 	}
 	
 	@ResponseBody
-	@RequestMapping("/signin")
-	public String signin(String tenantId, String userId, String userName, String password, String tenantName, String planId) throws ClientProtocolException, IOException{
-		userService.signIn(userId, password, userName, tenantId, tenantName, planId, domain, appId);
+	@RequestMapping(value = "/signUpStep3",method = RequestMethod.POST)
+	public String signUpStep3(String tenantId, String userId, String userName, String password, String tenantName, String planId) throws ClientProtocolException, IOException{
+		userService.signUp(userId, password, userName, tenantId, tenantName, planId, domain, appId);
 		return "SUCCESS";
 	}
 	
