@@ -24,7 +24,6 @@ $(document).ready(function() {
 		async: false,
 		cache: false,
 		success : function(data){
-			debugger;
 			var html = "<table class='table table-striped'>";
 			html += "<td><table class='table table-bordered'>";
 			html += "<tr><td>Name</td></tr>";
@@ -63,7 +62,7 @@ $(document).ready(function() {
 				html += "<tr><td>" + serviceList + "</td></tr>";
 
 				html += "<tr><td>" + price + "</td></tr>";
-				html += "<tr><td><input type='button' id='"+value.id+"' value='Subscribe'onclick='subscribe(this)'/></td></tr>";
+				html += "<tr><td><input class='btn btn-primary' type='button' id='"+value.id+"' value='Subscribe'onclick='subscribe(this)'/></td></tr>";
 				html += "</table></td>";
 
 			});

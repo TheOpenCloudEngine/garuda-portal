@@ -30,4 +30,8 @@
 	</bean>
 
 	<context:property-placeholder location="classpath:login.properties" />
+
+	<mvc:interceptors>
+		<bean class="org.uengine.garuda.client.interceptor.LoginInterceptor"/>
+	</mvc:interceptors>
 </beans>

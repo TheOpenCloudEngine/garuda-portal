@@ -96,7 +96,7 @@ $(document).ready(function() {
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="button" id="subscribe" class="btn btn-default">회원가입</button>
+				<button type="button" id="subscribe" class="btn btn-success">회원가입</button>
 			</div>
 		</div>
 	</form>
