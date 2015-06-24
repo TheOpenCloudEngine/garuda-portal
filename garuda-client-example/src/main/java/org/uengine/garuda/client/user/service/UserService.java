@@ -38,24 +38,24 @@ public class UserService {
 		return userMapper.selectUser(userId, password);
 	}
 	
-	public void signIn(String userId, String password, String userName, String tenantId, String tenantName, String planId, String domain, String appId) throws ClientProtocolException, IOException{
+	public void signUp(String userId, String password, String userName, String tenantId, String tenantName, String planId, String domain, String appId) throws ClientProtocolException, IOException{
 		userMapper.insertUser(userId, password, userName, tenantId);
 		tenantMapper.insertTenant(tenantId, tenantName);
 		String returnCode = tenantSubscribe(domain, appId, planId, tenantName);
 		
-		if(!returnCode.equals("200"))
+		if(!returnCode.equals("SUCCESS"))
 			throw new ClientProtocolException();
 	}
 	
 	public String tenantSubscribe(String domain, String appId, String planId, String tenantName) throws IllegalStateException, IOException{
 		String retunCode = "";
-		String url = domain + "/services/app/" + appId + "/tenant";
+		String url = domain + "/services/app/" + appId + "/subscribe";
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
 		
 		request.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("tenantId",tenantName));
+        nameValuePairs.add(new BasicNameValuePair("accountId",tenantName));
         nameValuePairs.add(new BasicNameValuePair("planId",planId));
         request.setEntity(new UrlEncodedFormEntity(nameValuePairs)); 
 		

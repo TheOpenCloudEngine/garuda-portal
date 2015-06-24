@@ -56,7 +56,6 @@
     <!--- 주기적 작업 MeteringService를 위함. -->
     <!--<task:annotation-driven />-->
 
-
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:org/uengine/bss/monetization/conf/mybatis-conf.xml"></property>
@@ -66,12 +65,7 @@
 		<property name="basePackage" value="org.uengine.bss.monetization.dao" />
 	</bean>
 
-	<context:component-scan base-package="org.uengine.bss.monetization.service" />
-
-	<bean id="billingService" class="org.uengine.bss.monetization.service.BillingService"/>
-    <bean id="meteringService" class="org.uengine.bss.monetization.service.MeteringService"/>
-
-    <util:properties id="billing" location="classpath:org/uengine/bss/monetization/conf/billing.properties" />
+	<util:properties id="billing" location="classpath:org/uengine/bss/monetization/conf/billing.properties" />
 
 	<jaxrs:server id="saasCxfServer" address="/">
 		<jaxrs:serviceBeans>

@@ -30,32 +30,8 @@ public class AppServiceImpl implements AppService {
 		Response response = getApp(appId);
 		App app = (App) response.getEntity();
 
-		// Init Plan service information.
-		List<Service> serviceList = app.getServiceList();
-		List<Plan> planList = app.getPlanList();
-		for (Service service : serviceList) {
-			for (Plan plan : planList) {
-				for (OneTimeServiceAndRate serviceAndRate : plan.getOneTimeServiceAndRateList()) {
-					if (serviceAndRate.getService().getId().equals(service.getId())) {
-						serviceAndRate.setService(service);
-					}
-				}
-
-				for (RecurringServiceAndRate serviceAndRate : plan.getRecurringServiceAndRateList()) {
-					if (serviceAndRate.getService().getId().equals(service.getId())) {
-						serviceAndRate.setService(service);
-					}
-				}
-
-				for (UsageServiceAndRate serviceAndRate : plan.getUsageServiceAndRateList()) {
-					if (serviceAndRate.getService().getId().equals(service.getId())) {
-						serviceAndRate.setService(service);
-					}
-				}
-			}
-		}
 		return Response.ok()
-				.entity(new GenericEntity<List<Plan>>(planList) {
+				.entity(new GenericEntity<List<Plan>>(app.getPlanList()) {
 				})
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET")

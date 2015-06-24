@@ -1,6 +1,6 @@
-<org.uengine.application.App>
+<org.uengine.bss.application.App>
   <id>sampleapp</id>
-  <name>Sample Application</name>
+  <name>셈플앱</name>
   <description>Sample Application helps cloud-centric organizations. organizations that build and manage cloud-facing applications to solve operational problems faster. Our solution analyzes log data from virtually any application, system, or platform to answer your burning questions:</description>
   <planList>
     <Plan id="Standard">
@@ -89,4 +89,4 @@
     </org.uengine.bss.monetization.Service>
   </serviceList>
   <metadataPropertyList/>
-</org.uengine.application.App>
+</org.uengine.bss.application.App>
