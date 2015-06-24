@@ -27,18 +27,16 @@
     </script>
 </head>
 <body>
-<div class="row">
-    <div class="col-md-10 col-md-offset-10">
-        <button type="button" id="logout" class="btn btn-default btn-lg">logout</button>
+<div class="text-right">
+    <button type="button" id="logout" class="btn btn-default btn-lg">logout</button>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Self Service
-        </button>
-    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Self Service
+    </button>
 </div>
 
-<h1 style="margin-left: 40px;">Login Success!</h1>
+<h1 class="text-center">Login Success!</h1>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
