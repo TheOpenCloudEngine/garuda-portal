@@ -17,6 +17,7 @@ import org.metaworks.annotation.Table;
 import org.metaworks.component.SelectBox;
 import org.metaworks.dao.IDAO;
 import org.metaworks.website.MetaworksFile;
+import org.uengine.bss.application.MetadataPropertyListFace;
 import org.uengine.codi.mw3.marketplace.category.ICategory;
 import org.uengine.codi.mw3.model.ICompany;
 
@@ -32,7 +33,7 @@ import org.uengine.codi.mw3.model.ICompany;
 		"{where: 'mapList', face: 'dwr/metaworks/org/uengine/codi/mw3/marketplace/IAppMap.ejs'}"
 	  },
       options={"fieldOrder"},
-      values={"categories,appName,appTypePanel,simpleOverview,fullOverview,logoFile"})
+      values={"categories,appName,appTypePanel,simpleOverview,fullOverview,logoFile,metadataPropertyListFace"})
 public interface IApp extends IDAO{
 	
 	public static final String APP_TYPE_PROJECT = "project";
@@ -157,6 +158,9 @@ public interface IApp extends IDAO{
 	public boolean isUseIaas();
 	public void setUseIaas(boolean useIaas);
 
+	@Face(displayName= "메타데이터")
+	public MetadataPropertyListFace getMetadataPropertyListFace();
+	public void setMetadataPropertyListFace(MetadataPropertyListFace metadataPropertyListFace);
 	
 	public IApp findMe() throws Exception;
 	

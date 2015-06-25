@@ -6,6 +6,7 @@ import org.metaworks.annotation.AutowiredFromClient;
 import org.metaworks.annotation.ServiceMethod;
 import org.metaworks.widget.ModalPanel;
 import org.metaworks.widget.ModalWindow;
+import org.uengine.bss.application.MetadataPropertyListFace;
 import org.uengine.codi.mw3.model.Session;
 
 public class MarketplaceMenu {
@@ -18,6 +19,7 @@ public class MarketplaceMenu {
 		App app = new App();
 		app.session = session;
 		app.load();
+		app.setMetadataPropertyListFace(new MetadataPropertyListFace());
 		app.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);
 		
 		return new ModalWindow(new ModalPanel(app), 1050, 550, "앱 등록");

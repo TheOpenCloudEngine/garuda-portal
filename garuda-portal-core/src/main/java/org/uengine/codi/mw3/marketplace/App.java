@@ -9,8 +9,10 @@ import org.metaworks.annotation.ServiceMethod;
 import org.metaworks.component.SelectBox;
 import org.metaworks.dao.Database;
 import org.metaworks.website.MetaworksFile;
+import org.metaworks.widget.ListFace;
 import org.metaworks.widget.ModalPanel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.uengine.bss.application.MetadataPropertyListFace;
 import org.uengine.codi.ITool;
 import org.uengine.codi.mw3.StartCodi;
 import org.uengine.codi.mw3.knowledge.FilepathInfo;
@@ -278,6 +280,15 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 		public void setUseIaas(boolean useIaas) {
 			this.useIaas = useIaas;
 		}
+
+	MetadataPropertyListFace metadataPropertyListFace;
+	public MetadataPropertyListFace getMetadataPropertyListFace() {
+		return metadataPropertyListFace;
+	}
+
+	public void setMetadataPropertyListFace(MetadataPropertyListFace metadataPropertyListFace) {
+		this.metadataPropertyListFace = metadataPropertyListFace;
+	}
 
 
 	@AutowiredFromClient
