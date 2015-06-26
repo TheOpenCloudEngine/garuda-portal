@@ -2,12 +2,12 @@ package org.uengine.bss.application;
 
 import org.metaworks.MetaworksContext;
 import org.metaworks.ServiceMethodContext;
-import org.metaworks.annotation.Hidden;
-import org.metaworks.annotation.Payload;
-import org.metaworks.annotation.Range;
-import org.metaworks.annotation.ServiceMethod;
+import org.metaworks.annotation.*;
 
+@Face(options = {"hideTitle"}, values = {"true"})
 public class MetadataProperty<T> {
+
+
 
     String key;
 
@@ -18,7 +18,6 @@ public class MetadataProperty<T> {
     public void setKey(String key) {
         this.key = key;
     }
-
 
     T defaultValue;
 
@@ -56,7 +55,9 @@ public class MetadataProperty<T> {
 
     @ServiceMethod(eventBinding = "change", bindingFor = "type", target = ServiceMethodContext.TARGET_SELF)
     public MetadataProperty changeType(@Payload("type") String type) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        return (MetadataProperty) Class.forName(getClass().getPackage().getName() + "." + type + "MetadataProperty").newInstance();
+        MetadataProperty metadataProperty = (MetadataProperty) Class.forName(getClass().getPackage().getName() + "." + type + "MetadataProperty").newInstance();
+        metadataProperty.setType(type);
+        return metadataProperty;
     }
 
 }
