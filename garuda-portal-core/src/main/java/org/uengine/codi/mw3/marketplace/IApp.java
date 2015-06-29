@@ -158,10 +158,6 @@ public interface IApp extends IDAO{
 	@NonSavable
 	public boolean isUseIaas();
 	public void setUseIaas(boolean useIaas);
-
-	@Face(displayName= "메타데이터")
-	public MetadataPropertyListFace getMetadataPropertyListFace();
-	public void setMetadataPropertyListFace(MetadataPropertyListFace metadataPropertyListFace);
 	
 	public IApp findMe() throws Exception;
 	
@@ -182,6 +178,10 @@ public interface IApp extends IDAO{
 	@Hidden
 	@ServiceMethod(callByContent=true)
 	public Object edit() throws Exception;
+
+	@Hidden
+	@ServiceMethod(callByContent=true)
+	public Object editForMetadata() throws Exception;
 	
 	@Hidden
 	@ServiceMethod(callByContent=true)

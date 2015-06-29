@@ -11,6 +11,7 @@ public class MetadataProperty<T> {
 
     String key;
 
+    @Order(1)
     public String getKey() {
         return key;
     }
@@ -21,6 +22,7 @@ public class MetadataProperty<T> {
 
     T defaultValue;
 
+    @Order(2)
     public T getDefaultValue() {
         return defaultValue;
     }
@@ -35,6 +37,7 @@ public class MetadataProperty<T> {
             options = {"Text", "File"},
             values = {"Text", "File"}
     )
+    @Order(3)
     public String getType() {
         return type;
     }

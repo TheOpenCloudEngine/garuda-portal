@@ -27,6 +27,7 @@ import org.uengine.persistence.dao.UniqueKeyGenerator;
 import org.uengine.processmanager.ProcessManagerBean;
 import org.uengine.processmanager.ProcessManagerRemote;
 
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -281,16 +282,6 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 			this.useIaas = useIaas;
 		}
 
-	MetadataPropertyListFace metadataPropertyListFace;
-	public MetadataPropertyListFace getMetadataPropertyListFace() {
-		return metadataPropertyListFace;
-	}
-
-	public void setMetadataPropertyListFace(MetadataPropertyListFace metadataPropertyListFace) {
-		this.metadataPropertyListFace = metadataPropertyListFace;
-	}
-
-
 	@AutowiredFromClient
 	transient public Session session;
 
@@ -499,6 +490,19 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 		this.getCategories().setSelected(String.valueOf(this.getCategory().getCategoryId()));
 //		this.getAppTypePanel().getAppType().setDisabled(true);
 		return new ModalPanel(this);
+	}
+
+	@Override
+	public Object editForMetadata() throws Exception {
+		org.uengine.bss.application.App app = null;
+		try {
+			app = org.uengine.bss.application.App.load(getAppName());
+		} catch (FileNotFoundException e) {
+			app = new org.uengine.bss.application.App();
+		}
+		app.setId(getAppName());
+		app.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);
+		return new ModalPanel(app);
 	}
 
 	public Object serverManage() throws Exception {

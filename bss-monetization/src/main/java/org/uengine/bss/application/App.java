@@ -1,12 +1,17 @@
 package org.uengine.bss.application;
 
 import com.thoughtworks.xstream.XStream;
+import org.metaworks.ContextAware;
+import org.metaworks.MetaworksContext;
+import org.metaworks.Remover;
 import org.metaworks.ServiceMethodContext;
 import org.metaworks.annotation.*;
 import org.metaworks.dao.TransactionContext;
+import org.metaworks.widget.ModalWindow;
 import org.uengine.bss.monetization.*;
 import org.uengine.bss.monetization.face.PlanListFace;
 import org.uengine.bss.monetization.face.ServiceListFace;
+import org.uengine.kernel.GlobalContext;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -14,10 +19,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Face(ejsPath="dwr/metaworks/genericfaces/ElementFace.ejs")
-public class App{
+public class App implements ContextAware{
+
+	transient MetaworksContext metaworksContext;
+	public MetaworksContext getMetaworksContext() {
+		if(metaworksContext==null){
+			metaworksContext = new MetaworksContext();
+		}
+		return metaworksContext;
+	}
+	public void setMetaworksContext(MetaworksContext context) {
+		this.metaworksContext = context;
+	}
+
 	public String id;
 	@Order(1)
 	@Id
+	@NonEditable
 	@Group(name="Basic")
 		public String getId() {
 			return id;
@@ -73,7 +91,7 @@ public class App{
 	List<MetadataProperty> metadataPropertyList = new ArrayList<MetadataProperty>();
 		@Face(faceClass = MetadataPropertyListFace.class)
 		@Order(5)
-		@Hidden
+		@Group(name="MetadataProperty")
 		public List<MetadataProperty> getMetadataPropertyList() {
 			return metadataPropertyList;
 		}
@@ -84,7 +102,7 @@ public class App{
 
 
 	@ServiceMethod(callByContent = true)
-	public void save() throws FileNotFoundException {
+	public Object save() throws FileNotFoundException {
 
 		XStream xstream = new XStream();
 		xstream.autodetectAnnotations(true);
@@ -97,10 +115,12 @@ public class App{
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+		return new Remover(new ModalWindow());
     }
 
     private static File getFile(String appId) {
-		return new File(getHomeDirectory() + appId + ".xml");
+//		return new File(getHomeDirectory() + appId + ".xml");
+		return new File(makeDirIfNotExist(getAppDirectory(appId)) + appId + ".xml");
     }
 
     private static String getHomeDirectory(){
@@ -110,6 +130,20 @@ public class App{
             return System.getenv("HOME") + File.separator;
         }
     }
+
+	private static String getAppDirectory(String appId){
+		String appDirectory = GlobalContext.getPropertyString("codebase") + File.separator + appId + File.separator
+				+ GlobalContext.getPropertyString("codebase.defaultFolder") + File.separator;
+        return appDirectory;
+    }
+
+	private static String makeDirIfNotExist(String path){
+		File directory = new File(path);
+		if(!directory.exists()){
+			directory.mkdirs();
+		}
+		return path;
+	}
 
 	@ServiceMethod(target=ServiceMethodContext.TARGET_SELF)
 	public static App load(@Payload("id") String appId) throws FileNotFoundException {

@@ -1,5 +1,5 @@
 <%
-
+	debugger;
 	if(value != null && typeof value != 'undefined'){
 		if(mw3.how == 'inList'){
 %>
@@ -86,32 +86,33 @@
 			if(mw3.when == 'marketplaceHome' || mw3.when == 'searchForSearchBox' || mw3.when == 'searchForCategory'){
 				if(value.status == 'Published') {
 %>
-								<div class="btnbadge" style="float:none"><a onClick="<%=methods.addApp.caller()%>"> Add it now </a></div>
+								<div class="btn btn-default"><a onClick="<%=methods.addApp.caller()%>"> Add it now </a></div>
 <%
 				}else if(value.status == 'Approved'){
 %>
-								<div class="btnbadge" style="float:none"><a onClick="<%=methods.readyPublished.caller()%>"> <%=mw3.localize("$ReadyForPublish")%> </a></div>								
+								<div class="btn btn-default"><a onClick="<%=methods.readyPublished.caller()%>"> <%=mw3.localize("$ReadyForPublish")%> </a></div>
 <%
 				}						
 			}else if(mw3.when == 'myVendor'){
 				if(value.status == 'Approved'){
 %>
-								<div class="btnbadge" style="float:none"><a onClick="<%=methods.readyPublished.caller()%>"> <%=mw3.localize("$ReadyForPublish")%> </a></div>
+								<div class="btn btn-default"><a onClick="<%=methods.readyPublished.caller()%>"> <%=mw3.localize("$ReadyForPublish")%> </a></div>
 <%
 				}else if(value.status == 'Published'){
 %>								
-								<div class="btnbadge" style="float:none"><a onClick="<%=methods.readyApproved.caller()%>"> <%=mw3.localize("$ReadyForApproved")%> </a></div>					
+								<div class="btn btn-default"><a onClick="<%=methods.readyApproved.caller()%>"> <%=mw3.localize("$ReadyForApproved")%> </a></div>
 <%
 				}else if(value.status == 'Request'){					
 %>
-								<div class="btnbadge" style="float:none"> <%=mw3.localize("$ReadyForManagerRequset")%> </div>						
+								<div class="btn btn-default"> <%=mw3.localize("$ReadyForManagerRequset")%> </div>
 <%
 				}		
 %>	
 				<% if(value.useIaas){ %>
 					<div class="btnbadge" style="float:none"><a onClick="<%=methods.serverManage.caller()%>"> <%=mw3.localize("$project.servers.prod.manage")%> </a></div>	
 				<% } %>
-				<div class="btnbadge" style="float:none"><a onClick="<%=methods.edit.caller()%>"> <%=mw3.localize("$Edit")%> </a></div>						
+				<div class="btn btn-default"><a onClick="<%=methods.edit.caller()%>"> <%=mw3.localize("$Edit")%> </a></div>
+				<div class="btn btn-default"><a onClick="<%=methods.editForMetadata.caller()%>"> <%=mw3.localize("$EditForMetadata")%> </a></div>
 
 <%
 			}					

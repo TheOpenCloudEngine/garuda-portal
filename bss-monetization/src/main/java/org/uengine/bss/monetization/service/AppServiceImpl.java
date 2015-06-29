@@ -119,6 +119,7 @@ public class AppServiceImpl implements AppService {
 			}
 
 			// Insert Tenant Join Data
+
 			sqlStmt = new StringBuffer();
 			sqlStmt.append("INSERT INTO APPMAPPING(APPID, COMCODE, PLANID, APPNAME, EFFECTIVEDATE, EXPIRATIONDATE, ISTRIAL) ")
 					.append("VALUES(?appId, ?comcode, ?planId, ?appName, ?effectiveDate, ?expirationDate, ?isTrial)");
