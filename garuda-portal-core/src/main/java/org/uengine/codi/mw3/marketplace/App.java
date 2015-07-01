@@ -583,7 +583,7 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 			this.setSubDomain(this.getSubDomain());
 //			this.setRunningVersion(Integer.parseInt(this.getReleaseVersion().getSelected()));
 			this.setProjectId(this.getAppTypePanel().getProjectId());
-			this.setStatus(STATUS_REQUEST);
+			this.setStatus(STATUS_APPROVED);
 			this.setLogoFile(logoFile);
 
 			createDatabaseMe();
@@ -591,28 +591,28 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 
 
 			// 앱 등록일 경우 프로세스 발행
-			String defId = "app/applications.process";
-
-			ProcessMap goProcess = new ProcessMap();
-			goProcess.session = session;
-			goProcess.processManager = processManager;
-			goProcess.instanceView = instanceView;
-			goProcess.setDefId(defId);
-
-			// 프로세스 발행
-			Long instId = Long.valueOf(goProcess.initializeProcess());
-
-			// 프로세스 실행
-			ResultPayload rp = new ResultPayload();
-			rp.setProcessVariableChange(new KeyedParameter("appInformation", this));
-
-			RoleMappingPanel roleMappingPanel = new RoleMappingPanel(processManager, goProcess.getDefId(), session);
-			roleMappingPanel.putRoleMappings(processManager, instId.toString());
-
-			// 무조건 compleate
-			processManager.executeProcessByWorkitem(instId.toString(), rp);
-//			processManager.executeProcess(instId.toString());
-			processManager.applyChanges();
+//			String defId = "app/applications.process";
+//
+//			ProcessMap goProcess = new ProcessMap();
+//			goProcess.session = session;
+//			goProcess.processManager = processManager;
+//			goProcess.instanceView = instanceView;
+//			goProcess.setDefId(defId);
+//
+//			// 프로세스 발행
+//			Long instId = Long.valueOf(goProcess.initializeProcess());
+//
+//			// 프로세스 실행
+//			ResultPayload rp = new ResultPayload();
+//			rp.setProcessVariableChange(new KeyedParameter("appInformation", this));
+//
+//			RoleMappingPanel roleMappingPanel = new RoleMappingPanel(processManager, goProcess.getDefId(), session);
+//			roleMappingPanel.putRoleMappings(processManager, instId.toString());
+//
+//			// 무조건 compleate
+//			processManager.executeProcessByWorkitem(instId.toString(), rp);
+////			processManager.executeProcess(instId.toString());
+//			processManager.applyChanges();
 
 //			TopicMapping tm = new TopicMapping();
 //			tm.setTopicId(String.valueOf(String.valueOf(this.getAppId())));
