@@ -4,6 +4,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.uengine.bss.application.App;
+import org.uengine.bss.application.TenantApp;
 import org.uengine.bss.monetization.Plan;
 import org.uengine.bss.monetization.ServiceAndRate;
 import org.uengine.bss.monetization.UsageStatus;
@@ -174,7 +175,7 @@ public class MeteringService {
                 String[] keys = e.getKey().split(":");
                 String appId = keys[0];
 
-                App app = App.load(appId);
+                TenantApp app = TenantApp.load(appId);
                 Map<String, Map<String, ServiceAndRate>> planServiceAndRateMap = appPlanMap.get(appId);
                 if(planServiceAndRateMap == null) {
                     planServiceAndRateMap = getPlanMap(app);

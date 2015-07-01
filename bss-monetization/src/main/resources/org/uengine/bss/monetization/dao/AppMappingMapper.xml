@@ -16,4 +16,12 @@
         delete from appmapping
         where appId = #{appId}
     </delete>
+
+    <insert id="insert"  parameterType="org.uengine.bss.monetization.entity.AppMapping">
+        REPLACE INTO appmapping (
+        appId,comCode,appName,isDeleted,planId,effectiveDate,expirationDate,isTrial
+        ) VALUES (
+        #{appId}, #{comCode}, #{appName}, #{isDeleted}, #{planId}, #{effectiveDate}, #{expirationDate}, #{isTrial}
+        )
+    </insert>
 </mapper>

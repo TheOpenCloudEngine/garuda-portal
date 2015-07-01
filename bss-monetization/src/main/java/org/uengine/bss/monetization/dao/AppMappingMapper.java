@@ -1,6 +1,7 @@
 package org.uengine.bss.monetization.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.uengine.bss.monetization.entity.AppMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -15,4 +16,7 @@ public interface AppMappingMapper {
 
     public void truncateAccount();
 
+    public void insert(AppMapping appMapping);
+
+    public void replace(AppMapping appMapping);
 }

@@ -1,5 +1,6 @@
-package org.uengine.bss.monetization;
+package org.uengine.bss.monetization.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -11,8 +12,8 @@ public class AppMapping {
     private String appName;
     private String isDeleted;
     private String planId;
-    private Date effectiveDate;
-    private Date expirationDate;
+    private Timestamp effectiveDate;
+    private Timestamp expirationDate;
     private int isTrial;
 
     public String getAppId() {
@@ -55,19 +56,19 @@ public class AppMapping {
         this.planId = planId;
     }
 
-    public Date getEffectiveDate() {
+    public Timestamp getEffectiveDate() {
         return effectiveDate;
     }
 
-    public void setEffectiveDate(Date effectiveDate) {
+    public void setEffectiveDate(Timestamp effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
-    public Date getExpirationDate() {
+    public Timestamp getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(Timestamp expirationDate) {
         this.expirationDate = expirationDate;
     }
 

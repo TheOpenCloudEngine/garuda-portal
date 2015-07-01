@@ -2,19 +2,23 @@ package org.uengine.bss.monetization.service;
 
 import org.springframework.stereotype.Component;
 import org.uengine.bss.application.App;
+import org.uengine.bss.application.TenantApp;
 import org.uengine.bss.monetization.BillingContext;
 import org.uengine.bss.monetization.Plan;
 import org.uengine.bss.monetization.ServiceUsages;
 import org.uengine.bss.monetization.UsageStatus;
 import org.uengine.bss.monetization.dao.AppMappingMapper;
+import org.uengine.bss.monetization.dao.ComtableMapper;
 import org.uengine.bss.monetization.dao.UsageStatusMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.uengine.bss.monetization.entity.AppMapping;
+import org.uengine.bss.monetization.entity.Comtable;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Component
 public class BillingService {
@@ -24,6 +28,9 @@ public class BillingService {
 
     @Autowired
     private UsageStatusMapper usageStatusMapper;
+
+	@Autowired
+	private ComtableMapper comtableMapper;
 
 	public BillingService(){
     }
@@ -45,7 +52,7 @@ public class BillingService {
         List<String> planIdList = appMappingMapper.select(appId, accountId);
         String planId = planIdList.get(0);
         // appId + accountId로 plan을 가져온다.
-        App app = App.load(appId);
+		TenantApp app = TenantApp.load(appId);
         Plan plan = null;
         List<Plan> planList = app.getPlanList();
         if(planList != null) {
@@ -82,7 +89,7 @@ public class BillingService {
         List<String> planIdList = appMappingMapper.select(appId, accountId);
         String planId = planIdList.get(0);
 		// appId + accountId로 plan을 가져온다.
-		App app = App.load(appId);
+		TenantApp app = TenantApp.load(appId);
 		Plan plan = null;
 		List<Plan> planList = app.getPlanList();
 		if(planList != null) {
@@ -127,7 +134,7 @@ public class BillingService {
 		List<String> planIdList = appMappingMapper.select(appId, accountId);
 		String planId = planIdList.get(0);
 		// appId + accountId로 plan을 가져온다.
-		App app = App.load(appId);
+		TenantApp app = TenantApp.load(appId);
 		Plan plan = null;
 		List<Plan> planList = app.getPlanList();
 		if(planList != null) {
@@ -160,5 +167,29 @@ public class BillingService {
 		result.put("msg", "");
 
 		return result;
+	}
+
+	public String subscribePlan(String appId, String accountId, String planId){
+		Comtable comtable = new Comtable();
+		comtable.setComcode(accountId);
+		comtable.setComname(accountId);
+		comtable.setAlias(accountId);
+		comtableMapper.replace(comtable);
+
+		AppMapping appMapping = new AppMapping();
+		appMapping.setAppId(appId);
+		appMapping.setAppName(appId);
+		appMapping.setComCode(comtable.getComcode());
+		appMapping.setPlanId(planId);
+
+		Calendar cal = GregorianCalendar.getInstance();
+		Timestamp effectiveStamp = new Timestamp(cal.getTimeInMillis());
+		cal.add(Calendar.DATE, 30);
+		Timestamp expirationStamp = new Timestamp(cal.getTimeInMillis());
+
+		appMapping.setEffectiveDate(effectiveStamp);
+		appMapping.setExpirationDate(expirationStamp);
+		appMapping.setIsTrial(0);
+		return "SUCCESS";
 	}
 }

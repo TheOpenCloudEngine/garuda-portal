@@ -1,20 +1,12 @@
 package org.uengine.bss.application;
 
-import com.thoughtworks.xstream.XStream;
 import org.metaworks.ContextAware;
 import org.metaworks.MetaworksContext;
-import org.metaworks.Remover;
-import org.metaworks.ServiceMethodContext;
 import org.metaworks.annotation.*;
-import org.metaworks.dao.TransactionContext;
-import org.metaworks.widget.ModalWindow;
 import org.uengine.bss.monetization.*;
 import org.uengine.bss.monetization.face.PlanListFace;
 import org.uengine.bss.monetization.face.ServiceListFace;
-import org.uengine.kernel.GlobalContext;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +56,17 @@ public class App implements ContextAware{
 			this.description = description;
 		}
 
+	public String tenantid;
+	@Order(4)
+	@Hidden
+	@Group(name="Basic")
+		public String getTenantid() {
+			return tenantid;
+		}
+		public void setTenantid(String tenantid) {
+			this.tenantid = tenantid;
+		}
+
 	public List<Plan> planList = new ArrayList<Plan>();
 		@Face(faceClass = PlanListFace.class)
 		@Order(5)
@@ -98,97 +101,6 @@ public class App implements ContextAware{
 		public void setMetadataPropertyList(List<MetadataProperty> metadataPropertyList) {
 			this.metadataPropertyList = metadataPropertyList;
 		}
-
-
-
-	@ServiceMethod(callByContent = true)
-	public Object save() throws FileNotFoundException {
-
-		XStream xstream = new XStream();
-		xstream.autodetectAnnotations(true);
-		xstream.toXML(this, System.out);
-
-        try {
-            File f = getFile(getId());
-            System.out.println("Wrote file to " + f.getAbsolutePath());
-            xstream.toXML(this, new OutputStreamWriter(new FileOutputStream(f), "utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-		return new Remover(new ModalWindow());
-    }
-
-    private static File getFile(String appId) {
-//		return new File(getHomeDirectory() + appId + ".xml");
-		return new File(makeDirIfNotExist(getAppDirectory(appId)) + appId + ".xml");
-    }
-
-    private static String getHomeDirectory(){
-        if(System.getProperty("os.name").startsWith("Windows")){
-            return System.getProperty("user.home") + File.separator;
-        }else{
-            return System.getenv("HOME") + File.separator;
-        }
-    }
-
-	private static String getAppDirectory(String appId){
-		String appDirectory = GlobalContext.getPropertyString("codebase") + File.separator + appId + File.separator
-				+ GlobalContext.getPropertyString("codebase.defaultFolder") + File.separator;
-        return appDirectory;
-    }
-
-	private static String makeDirIfNotExist(String path){
-		File directory = new File(path);
-		if(!directory.exists()){
-			directory.mkdirs();
-		}
-		return path;
-	}
-
-	@ServiceMethod(target=ServiceMethodContext.TARGET_SELF)
-	public static App load(@Payload("id") String appId) throws FileNotFoundException {
-
-		XStream xstream = new XStream();
-		xstream.autodetectAnnotations(true);
-
-		App app = (App) xstream.fromXML(new InputStreamReader(new FileInputStream(getFile(appId)), StandardCharsets.UTF_8));
-
-        // Init Plan service information.
-		List<Service> serviceList = app.getServiceList();
-		List<Plan> planList = app.getPlanList();
-		for (Service service : serviceList) {
-			for (Plan plan : planList) {
-                if(plan.getOneTimeServiceAndRateList() != null) {
-                    for (OneTimeServiceAndRate serviceAndRate : plan.getOneTimeServiceAndRateList()) {
-                        if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
-                            serviceAndRate.setService(service);
-                        }
-                    }
-                }
-                if(plan.getRecurringServiceAndRateList() != null) {
-                    for (RecurringServiceAndRate serviceAndRate : plan.getRecurringServiceAndRateList()) {
-                        if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
-                            serviceAndRate.setService(service);
-                        }
-                    }
-                }
-                if(plan.getUsageServiceAndRateList() != null) {
-                    for (UsageServiceAndRate serviceAndRate : plan.getUsageServiceAndRateList()) {
-                        if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
-                            serviceAndRate.setService(service);
-                        }
-                    }
-                }
-			}
-		}
-
-		if(TransactionContext.getThreadLocalInstance()!=null)
-			TransactionContext.getThreadLocalInstance().setSharedContext("app", app);
-
-		return app;
-	}
-
-
 
 //	@ServiceMethod(callByContent = true, target= ServiceMethodContext.TARGET_POPUP)
 //	public static Invoice createInvoice(){
