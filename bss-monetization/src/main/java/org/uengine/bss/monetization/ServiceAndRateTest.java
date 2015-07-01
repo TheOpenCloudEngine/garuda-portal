@@ -2,6 +2,7 @@ package org.uengine.bss.monetization;
 
 import org.junit.Test;
 import org.uengine.bss.application.App;
+import org.uengine.bss.application.TenantApp;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -17,7 +18,7 @@ public class ServiceAndRateTest {
     @Test
     public void calculateStandard() throws FileNotFoundException {
 
-        App app = App.load(appId);
+        TenantApp app = TenantApp.load(appId);
         List<Plan> planList = app.getPlanList();
 
         /**
@@ -52,7 +53,7 @@ public class ServiceAndRateTest {
     @Test
     public void calculateEnterprise() throws FileNotFoundException {
 
-        App app = App.load(appId);
+        TenantApp app = TenantApp.load(appId);
         List<Plan> planList = app.getPlanList();
 
         /**

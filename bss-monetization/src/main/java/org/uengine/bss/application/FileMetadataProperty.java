@@ -3,12 +3,29 @@ package org.uengine.bss.application;
 import org.metaworks.MetaworksContext;
 import org.metaworks.MetaworksFile;
 
-public class FileMetadataProperty extends MetadataProperty<MetaworksFile> {
+import java.io.FileNotFoundException;
+
+public class FileMetadataProperty extends MetadataProperty<MetadataFile> {
 
     public FileMetadataProperty(){
-        setDefaultValue(new MetaworksFile());
+        setDefaultValue(new MetadataFile());
         this.setMetaworksContext(new MetaworksContext());
         this.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);
     }
 
+    @Override
+    public MetadataFile getDefaultValue() {
+        return super.getDefaultValue();
+    }
+
+    @Override
+    public void setDefaultValue(MetadataFile defaultValue) {
+        super.setDefaultValue(defaultValue);
+    }
+
+    public void upload(String appId, String tenantId) throws Exception {
+        getDefaultValue().setAppId(appId);
+        getDefaultValue().setTenantId(tenantId);
+        getDefaultValue().upload();
+    }
 }

@@ -5,6 +5,7 @@ import org.metaworks.dao.MetaworksDAO;
 import org.metaworks.spring.SpringConnectionFactory;
 import org.springframework.stereotype.Component;
 import org.uengine.bss.application.App;
+import org.uengine.bss.application.TenantApp;
 import org.uengine.bss.monetization.*;
 import org.uengine.bss.monetization.api.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AppServiceImpl implements AppService {
 
 	public Response getPlans(String appId) throws FileNotFoundException {
 		Response response = getApp(appId);
-		App app = (App) response.getEntity();
+		TenantApp app = (TenantApp) response.getEntity();
 
 		return Response.ok()
 				.entity(new GenericEntity<List<Plan>>(app.getPlanList()) {
@@ -58,7 +59,7 @@ public class AppServiceImpl implements AppService {
 	public Response getApp(String appId) throws FileNotFoundException {
 		return Response
 				.ok()
-				.entity(App.load(appId))
+				.entity(TenantApp.load(appId))
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods",
 						"GET").build();
