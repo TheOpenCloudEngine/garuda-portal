@@ -69,9 +69,11 @@ public class TenantApp extends App{
 
     public static File getFileOfGarudaApp(String appId, String tenantId, String fileName) throws FileNotFoundException {
         File garudaAppFile = new File(getGarudaAppPathAndCreateIfNotExist(appId, tenantId) + fileName);
-        if(!garudaAppFile.exists()){
-            garudaAppFile = new File(getGarudaAppDefaultPathAndCreateIfNotExist(appId) + fileName);
-        }
+        return garudaAppFile;
+    }
+
+    public static File getDefaultFileOfGarudaApp(String appId, String fileName) throws FileNotFoundException {
+        File garudaAppFile = new File(getGarudaAppDefaultPathAndCreateIfNotExist(appId) + fileName);
         return garudaAppFile;
     }
 
@@ -111,7 +113,12 @@ public class TenantApp extends App{
         XStream xstream = new XStream();
         xstream.autodetectAnnotations(true);
 
-        TenantApp app = (TenantApp) xstream.fromXML(new InputStreamReader(new FileInputStream(TenantApp.getFileOfGarudaApp(appId, tenantId, UENGINE_METADATA_FILE)), StandardCharsets.UTF_8));
+        File uengine_metadata_file = TenantApp.getFileOfGarudaApp(appId, tenantId, UENGINE_METADATA_FILE);
+        if(!uengine_metadata_file.exists()){
+            uengine_metadata_file = TenantApp.getDefaultFileOfGarudaApp(appId, UENGINE_METADATA_FILE);
+        }
+
+        TenantApp app = (TenantApp) xstream.fromXML(new InputStreamReader(new FileInputStream(uengine_metadata_file), StandardCharsets.UTF_8));
 
         for(MetadataProperty metadataProperty : app.getMetadataPropertyList()){
             if(metadataProperty instanceof FileMetadataProperty){

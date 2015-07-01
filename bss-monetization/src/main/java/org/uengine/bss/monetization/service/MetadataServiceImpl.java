@@ -49,7 +49,12 @@ public class MetadataServiceImpl implements MetadataService{
 
         for(MetadataProperty metadataProperty : app.getMetadataPropertyList()){
             if(metadataProperty instanceof FileMetadataProperty && Objects.equals(key, metadataProperty.getKey())){
-                imageFile = TenantApp.getFileOfGarudaApp(appId, tenantId, ((MetadataFile) metadataProperty.getDefaultValue()).getUploadedPath());
+                String fileName = ((MetadataFile) metadataProperty.getDefaultValue()).getUploadedPath();
+                imageFile = TenantApp.getFileOfGarudaApp(appId, tenantId, fileName);
+                if(!imageFile.exists()){
+                    imageFile = TenantApp.getDefaultFileOfGarudaApp(appId, fileName);
+                }
+
                 break;
             }
         }

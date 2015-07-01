@@ -39,10 +39,9 @@
 
 <img src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/image/companyLogo" class="img-rounded">
 
-<h1 src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName"/>
+<frame src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName" frameborder="1"
+       name="header" title="Header window">
 
-<h1 class="text-center">Login Success!</h1>
-<label data-src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName">${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName</label>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:1000px;">
