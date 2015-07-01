@@ -20,6 +20,8 @@ import java.util.List;
 public class TenantApp extends App{
     private final static String DEFAULT_TENANT_FOLDER = "default";
 
+    private final static String UENGINE_METADATA_FILE = "uengine.metadata";
+
     public static String getCodebaseRoot(){
         return GlobalContext.getPropertyString("codebase") + File.separator;
     }
@@ -82,7 +84,7 @@ public class TenantApp extends App{
         }
 
         try {
-            File f = TenantApp.getFileOfGarudaApp(getId(), getTenantid(), getId() + ".xml");
+            File f = TenantApp.getFileOfGarudaApp(getId(), getTenantid(), UENGINE_METADATA_FILE);
             System.out.println("Wrote file to " + f.getAbsolutePath());
             xstream.toXML(this, new OutputStreamWriter(new FileOutputStream(f), "utf-8"));
         } catch (UnsupportedEncodingException e) {
@@ -101,7 +103,7 @@ public class TenantApp extends App{
         XStream xstream = new XStream();
         xstream.autodetectAnnotations(true);
 
-        TenantApp app = (TenantApp) xstream.fromXML(new InputStreamReader(new FileInputStream(TenantApp.getFileOfGarudaApp(appId, tenantId, appId + ".xml")), StandardCharsets.UTF_8));
+        TenantApp app = (TenantApp) xstream.fromXML(new InputStreamReader(new FileInputStream(TenantApp.getFileOfGarudaApp(appId, tenantId, UENGINE_METADATA_FILE)), StandardCharsets.UTF_8));
 
         for(MetadataProperty metadataProperty : app.getMetadataPropertyList()){
             if(metadataProperty instanceof FileMetadataProperty){
