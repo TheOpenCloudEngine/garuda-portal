@@ -34,6 +34,14 @@ public class TenantApp extends App{
         return getCodebaseRoot()+ appId + File.separator + DEFAULT_TENANT_FOLDER + File.separator;
     }
 
+    public static String getGarudaAppDefaultPathAndCreateIfNotExist(String appId){
+        String defaultAppPath = TenantApp.getGarudaAppDefaultPath(appId);
+
+        createDirectoryIfNotExist(defaultAppPath);
+
+        return defaultAppPath;
+    }
+
     public static String getTenantFolder(String tenantId){
         return tenantId == null ? DEFAULT_TENANT_FOLDER : tenantId;
     }
@@ -41,28 +49,28 @@ public class TenantApp extends App{
     public static String getGarudaAppPathAndCreateIfNotExist(String appId, String tenantId){
         String appPath = getGarudaAppPath(appId, tenantId);
 
-        File appDirectory = new File(appPath);
-        boolean ifCreate = appDirectory.mkdirs();
-
-        if(ifCreate){
-            System.out.printf("Directory %s is created!", appPath);
-        }else if(appDirectory.exists()){
-            System.out.printf("Directory %s is already existed!", appPath);
-        }else{
-            System.out.printf("Directory %s cannot be created!", appPath);
-        }
+        createDirectoryIfNotExist(appPath);
 
         return appPath;
     }
 
-    public static File getFileOfGarudaApp(String appId, String tenantId, String fileName) throws FileNotFoundException {
-        File garudaAppFile = new File(getGarudaAppPath(appId, tenantId) + fileName);
-        if(!garudaAppFile.exists()){
-            garudaAppFile = new File(getGarudaAppDefaultPath(appId) + fileName);
+    private static void createDirectoryIfNotExist(String path){
+        File appDirectory = new File(path);
+        boolean ifCreate = appDirectory.mkdirs();
 
-            if(!garudaAppFile.exists()){
-                throw new FileNotFoundException("File " + getGarudaAppDefaultPath(appId) + fileName + " is not existed!");
-            }
+        if(ifCreate){
+            System.out.printf("Directory %s is created!", path);
+        }else if(appDirectory.exists()){
+            System.out.printf("Directory %s is already existed!", path);
+        }else{
+            System.out.printf("Directory %s cannot be created!", path);
+        }
+    }
+
+    public static File getFileOfGarudaApp(String appId, String tenantId, String fileName) throws FileNotFoundException {
+        File garudaAppFile = new File(getGarudaAppPathAndCreateIfNotExist(appId, tenantId) + fileName);
+        if(!garudaAppFile.exists()){
+            garudaAppFile = new File(getGarudaAppDefaultPathAndCreateIfNotExist(appId) + fileName);
         }
         return garudaAppFile;
     }
