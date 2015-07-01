@@ -32,15 +32,4 @@ public class MetadataFile extends MetaworksFile{
     public String overrideUploadPathPrefix() {
         return TenantApp.getGarudaAppPath(getAppId(),getTenantId());
     }
-
-    @Override
-    public String renameUploadFile(String filename) {
-        return UEngineUtil.getCalendarDir() + "/" + super.renameUploadFile(filename);
-    }
-
-    @Override
-    public String renameUploadFileWithMimeType(String filename, String mimeType) {
-        // TODO Auto-generated method stub
-        return UEngineUtil.getCalendarDir() + "/" + super.renameUploadFileWithMimeType(filename, mimeType);
-    }
 }
