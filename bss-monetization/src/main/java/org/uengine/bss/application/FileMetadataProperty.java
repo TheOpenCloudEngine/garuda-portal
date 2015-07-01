@@ -10,7 +10,9 @@ public class FileMetadataProperty extends MetadataProperty<MetadataFile> {
     public FileMetadataProperty(){
         setDefaultValue(new MetadataFile());
         this.setMetaworksContext(new MetaworksContext());
-        this.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);
+        if(this.getMetaworksContext().getWhen() == null){
+            this.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);
+        }
     }
 
     @Override

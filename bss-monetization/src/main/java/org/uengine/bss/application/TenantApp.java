@@ -82,7 +82,7 @@ public class TenantApp extends App{
         xstream.toXML(this, System.out);
 
         for(MetadataProperty metadataProperty : getMetadataPropertyList()){
-            if(metadataProperty instanceof FileMetadataProperty){
+            if(metadataProperty instanceof FileMetadataProperty && ((FileMetadataProperty)metadataProperty).getDefaultValue().getUploadedPath() == null){
                 try {
                     ((FileMetadataProperty) metadataProperty).upload(getId(),getTenantid());
                 } catch (Exception e) {
@@ -119,7 +119,6 @@ public class TenantApp extends App{
                 if(metadataFile != null){
                     metadataFile.setAppId(appId);
                     metadataFile.setTenantId(TenantApp.getTenantFolder(tenantId));
-                    metadataFile.getMetaworksContext().setWhen("attach");
                 }
             }
         }
