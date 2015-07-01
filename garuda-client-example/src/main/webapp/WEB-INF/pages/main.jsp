@@ -34,10 +34,15 @@
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
         Self Service
     </button>
+
 </div>
 
-<h1 class="text-center">Login Success!</h1>
+<img src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/image/companyLogo" class="img-rounded">
 
+<h1 src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName"/>
+
+<h1 class="text-center">Login Success!</h1>
+<label data-src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName">${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName</label>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:1000px;">

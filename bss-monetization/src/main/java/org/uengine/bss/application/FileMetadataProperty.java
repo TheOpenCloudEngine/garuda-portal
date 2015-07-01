@@ -28,6 +28,9 @@ public class FileMetadataProperty extends MetadataProperty<MetadataFile> {
     public void upload(String appId, String tenantId) throws Exception {
         getDefaultValue().setAppId(appId);
         getDefaultValue().setTenantId(tenantId);
-        getDefaultValue().upload();
+        if(getDefaultValue().getUploadedPath() == null ||
+                (getDefaultValue().getUploadedPath() != null && getDefaultValue().getDeletedPath() != null)){
+            getDefaultValue().upload();
+        }
     }
 }

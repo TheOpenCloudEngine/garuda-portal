@@ -82,7 +82,7 @@ public class TenantApp extends App{
         xstream.toXML(this, System.out);
 
         for(MetadataProperty metadataProperty : getMetadataPropertyList()){
-            if(metadataProperty instanceof FileMetadataProperty && ((FileMetadataProperty)metadataProperty).getDefaultValue().getUploadedPath() == null){
+            if(metadataProperty instanceof FileMetadataProperty){
                 try {
                     ((FileMetadataProperty) metadataProperty).upload(getId(),getTenantid());
                 } catch (Exception e) {

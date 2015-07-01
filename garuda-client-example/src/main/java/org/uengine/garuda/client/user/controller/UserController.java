@@ -59,7 +59,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/main")
-	public String main(){
+	public String main(Model model){
+		model.addAttribute("appId", appId);
+		model.addAttribute("domain", domain);
 		return "main";
 	}
 	
