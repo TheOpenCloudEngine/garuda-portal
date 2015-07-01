@@ -1,0 +1,30 @@
+<%
+if(value){
+    if(mw3.where != "selfservice"){
+%>
+    <tr>
+    <td>Key : </td>
+    <td class="text-right"><%=fields.key.here()%></td>
+    </tr>
+    <tr>
+    <td>Value : </td>
+    <td class="text-right"><%=fields.defaultValue.here()%></td>
+    </tr>
+
+<%
+    }else{
+%>
+    <tr>
+    <td>Key : </td>
+    <td class="text-right"><%=fields.key.here({when:'view'})%></td>
+    </tr>
+    <tr>
+    <td>Value : </td>
+    <td class="text-right"><%=fields.defaultValue.here()%></td>
+    </tr>
+<%
+    }
+%>
+<%
+}
+%>
