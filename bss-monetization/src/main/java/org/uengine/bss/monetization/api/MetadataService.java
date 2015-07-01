@@ -19,8 +19,9 @@ public interface MetadataService {
 
     @GET
     @Path("/app/{appId}/tenant/{tenantId}/image/{key}")
-    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Produces({"image/png", "image/jpg", "image/gif"})
     public Response getImageMetadata(@PathParam("appId") String appId,@PathParam("tenantId") String tenantId,
-                                  @PathParam("key") String key) throws FileNotFoundException;
+                                  @PathParam("key") String key, @HeaderParam("If-Modified-Since") String modified)
+            throws FileNotFoundException;
 
 }
