@@ -33,7 +33,7 @@ import org.uengine.codi.mw3.model.ICompany;
 		"{where: 'mapList', face: 'dwr/metaworks/org/uengine/codi/mw3/marketplace/IAppMap.ejs'}"
 	  },
       options={"fieldOrder"},
-      values={"categories,appName,appTypePanel,simpleOverview,fullOverview,metadataPropertyListFace"})
+      values={"categories,appName,appTypePanel,simpleOverview,fullOverview,logoFile,metadataPropertyListFace"})
 public interface IApp extends IDAO{
 	
 	public static final String APP_TYPE_PROJECT = "project";
@@ -96,7 +96,6 @@ public interface IApp extends IDAO{
 	public String getAppType();
 	public void setAppType(String appType);
 
-	@Hidden
 	@Face(displayName="$App.LogoFileAttach")
 	@ORMapping(
 		databaseFields={"logoContent", "logoFileName"}, 

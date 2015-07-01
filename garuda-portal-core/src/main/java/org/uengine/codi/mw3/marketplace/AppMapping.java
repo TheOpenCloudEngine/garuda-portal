@@ -164,6 +164,20 @@ public class AppMapping extends Database<IAppMapping> implements IAppMapping {
 		
 		this.setProjectName(projectName);
 	}
+
+	public IAppMapping findMeWithAppName() throws Exception {
+
+		IAppMapping findApp = (IAppMapping) Database.sql(IAppMapping.class, "select appmapping.appId, appmapping.comcode, appmapping.appname, appmapping.isdeleted, appmapping.url, appmapping.appType, appmapping.planId, appmapping.effectiveDate, appmapping.expirationDate, appmapping.isTrial, bpm_knol.name projectName from appmapping appmapping, app, bpm_knol where appmapping.appId = app.appId and app.projectId = bpm_knol.id and appmapping.appname=?appname and appmapping.comcode=?comCode");
+
+		findApp.setAppName(this.getAppName());
+		findApp.setComCode(this.getComCode());
+		findApp.select();
+
+		if(findApp.next())
+			return findApp;
+		else
+			return null;
+	}
 	
 	public Object[] clickAppList() throws Exception {
 		

@@ -12,7 +12,7 @@ import org.uengine.codi.mw3.marketplace.Marketplace;
 import java.util.ArrayList;
 
 /**
- * Created by hoo.lim on 6/19/2015.
+ * Created by soo on 6/19/2015.
  */
 @Component
 public class GarudaAllAppList extends AllAppList{
@@ -29,6 +29,9 @@ public class GarudaAllAppList extends AllAppList{
     public Object[] goAppStore() throws Exception{
         Marketplace marketplace = new Marketplace(session);
 
-        return new Object[]{new Refresh(marketplace), new ToEvent(ServiceMethodContext.TARGET_SELF, EventContext.EVENT_CLOSE)};
+
+        topPanel.setTopCenterTitle("Market Place");
+
+        return new Object[]{new Refresh(marketplace), new Refresh(topPanel), new ToEvent(ServiceMethodContext.TARGET_SELF, EventContext.EVENT_CLOSE)};
     }
 }
