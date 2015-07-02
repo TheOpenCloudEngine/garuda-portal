@@ -37,10 +37,9 @@
 
 </div>
 
-<img src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/image/companyLogo" class="img-rounded">
+<img src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/image/companyLogo" class="img-rounded" width="100px" height="50px">
 
-<frame src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/text/companyName" frameborder="1"
-       name="header" title="Header window">
+<h1>${companyName}</h1>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -52,7 +51,7 @@
                 <h4 class="modal-title" id="myModalLabel">Self Service</h4>
             </div>
             <div class="modal-body">
-                <iframe frameborder="0" src="http://www.baidu.com/" height="700px" width="900px"></iframe>
+                <iframe frameborder="0" src="${domain}/selfservice.html?appName=${appId}&comName=${user.tenantId}" height="700px" width="900px"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

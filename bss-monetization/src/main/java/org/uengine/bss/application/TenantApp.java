@@ -99,6 +99,8 @@ public class TenantApp extends App{
             xstream.toXML(this, new OutputStreamWriter(new FileOutputStream(f), "utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        }finally {
+
         }
 
         return new Remover(new ModalWindow());

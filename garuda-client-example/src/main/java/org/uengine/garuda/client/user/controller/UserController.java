@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import org.uengine.garuda.client.user.entity.User;
+import org.uengine.garuda.client.user.rest.client.MetadataServiceClient;
 import org.uengine.garuda.client.user.service.UserService;
 
 @RequestMapping("/user")
@@ -59,9 +60,11 @@ public class UserController {
 	}
 	
 	@RequestMapping("/main")
-	public String main(Model model){
+	public String main(Model model, HttpSession session ) throws IOException {
+		User user = (User) session.getAttribute("user");
 		model.addAttribute("appId", appId);
 		model.addAttribute("domain", domain);
+		model.addAttribute("companyName", MetadataServiceClient.getTextMetadata(domain,appId,user.getTenantId(),"companyName"));
 		return "main";
 	}
 	
