@@ -21,7 +21,7 @@
             });
 
             $("#saveChange").click(function () {
-                alert("Save Changed");
+                location.reload();
             });
         });
     </script>
@@ -37,9 +37,9 @@
 
 </div>
 
-<img src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/image/companyLogo" class="img-rounded" width="100px" height="50px">
+<img src="${domain}/services/metadata/app/${appId}/tenant/${user.tenantId}/image/companyLogo" class="img-rounded" width="200px" height="100px">
 
-<h1>${companyName}</h1>
+<h1>Company name is ${companyName}.</h1>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

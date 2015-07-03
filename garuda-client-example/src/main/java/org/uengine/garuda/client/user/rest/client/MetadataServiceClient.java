@@ -11,8 +11,6 @@ import java.io.IOException;
  */
 public class MetadataServiceClient {
     public static String getTextMetadata(String domain, String appId, String tenantId, String keyValue) throws IOException {
-        Component component = new Component();
-
         ClientResource resource = new ClientResource(domain + "/services/metadata/app/" + appId + "/tenant/" + tenantId
                 + "/text/" + keyValue);
 
