@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.ClientProtocolException;
+import org.oce.garuda.multitenancy.TenantContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -61,10 +62,11 @@ public class UserController {
 	
 	@RequestMapping("/main")
 	public String main(Model model, HttpSession session ) throws IOException {
-		User user = (User) session.getAttribute("user");
+		TenantContext tenantContext = TenantContext.getThreadLocalInstance();
 		model.addAttribute("appId", appId);
 		model.addAttribute("domain", domain);
-		model.addAttribute("companyName", MetadataServiceClient.getTextMetadata(domain,appId,user.getTenantId(),"companyName"));
+		model.addAttribute("companyName", MetadataServiceClient.getTextMetadata(domain,appId,tenantContext.getTenantId(),
+				"companyName"));
 		return "main";
 	}
 	
