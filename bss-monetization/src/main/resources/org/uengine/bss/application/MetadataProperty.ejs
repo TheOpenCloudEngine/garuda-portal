@@ -1,6 +1,6 @@
 <%
 if(value){
-    if(mw3.where != "selfservice"){
+    if(mw3.where != 'ssp'){
 %>
         <tr>
         <td>Key : </td>
@@ -17,6 +17,9 @@ if(value){
 
 <%
     }else{
+        if(mw3.how == 'hide'){
+
+        }else{
 %>
         <tr>
         <td>Key : </td>
@@ -27,6 +30,7 @@ if(value){
         <td class="text-right"><%=fields.defaultValue.here()%></td>
         </tr>
 <%
+        }
     }
 %>
 <%
