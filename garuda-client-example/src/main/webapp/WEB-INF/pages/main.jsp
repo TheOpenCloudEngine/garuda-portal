@@ -25,7 +25,7 @@
             });
 
             $("#custom").click(function () {
-                window.open("${domain}/selfservice.html?appName=${appId}&comName=${user.tenantId}",'Self Service','height=900,width=500');
+                window.open("${domain}/selfservice.html?appName=${appId}&comName=${user.tenantId}",'Self Service','height=900,width=900');
             });
 
         });
