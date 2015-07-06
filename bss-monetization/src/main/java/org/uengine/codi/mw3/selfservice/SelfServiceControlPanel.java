@@ -114,7 +114,7 @@ public class SelfServiceControlPanel {
     @ServiceMethod(callByContent = true)
     public void popupApp() throws Exception { //TODO naming -> appSelected() is better ==> 영어공부 좀 할 필]
 
-        this.setMetadataPropertyList(TenantApp.load(appName, comName).getMetadataPropertyList());
+        this.setMetadataPropertyList(TenantApp.load(appName).getMetadataPropertyList());
 
         MetadataProperty mp = new MetadataProperty();
         mp.setId("metaDetailView");
@@ -147,7 +147,6 @@ public class SelfServiceControlPanel {
     public void save(int index) throws Exception {
         TenantApp tenantApp = new TenantApp();
         tenantApp.setId(appName);
-        tenantApp.setTenantid(comName);
 
         this.getMetadataProperty().setId("");
 
