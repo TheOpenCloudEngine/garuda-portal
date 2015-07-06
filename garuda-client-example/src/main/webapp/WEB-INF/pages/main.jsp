@@ -23,6 +23,11 @@
             $("#saveChange").click(function () {
                 location.reload();
             });
+
+            $("#custom").click(function () {
+                window.open("${domain}/selfservice.html?appName=${appId}&comName=${user.tenantId}",'Self Service','height=900,width=500');
+            });
+
         });
     </script>
 </head>
@@ -30,11 +35,9 @@
 <div class="text-right">
     <button type="button" id="logout" class="btn btn-default btn-lg">logout</button>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary btn-lg" id="custom">
         Self Service
     </button>
-
 </div>
 
 <img src="${domain}/services/metadata/app/${appId}/image/companyLogo" class="img-rounded" width="200px" height="100px">
