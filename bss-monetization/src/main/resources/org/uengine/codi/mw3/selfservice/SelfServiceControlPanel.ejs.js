@@ -14,7 +14,7 @@ var org_uengine_codi_mw3_selfservice_SelfServiceControlPanel = function(objectId
 	}).addClass('mw3_resize');
 	
 	var accordionDiv = $("#sp_accordion");
-	
+
 	accordionDiv.accordion({
 		fillSpace:	true ,
 		active: 3,

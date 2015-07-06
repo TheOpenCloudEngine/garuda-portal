@@ -133,7 +133,7 @@ public class SelfServiceControlPanel {
 
     }
 
-    public void save(int index) throws Exception {
+    public Refresh save(int index) throws Exception {
         TenantApp tenantApp = new TenantApp();
         tenantApp.setId(appName);
 
@@ -150,7 +150,10 @@ public class SelfServiceControlPanel {
         }
 
         tenantApp.setMetadataPropertyList(metadataPropertyList);
+        this.setMetadataPropertyList(metadataPropertyList);
         tenantApp.save();
+
+        return new Refresh(this, true);
 
     }
 }
