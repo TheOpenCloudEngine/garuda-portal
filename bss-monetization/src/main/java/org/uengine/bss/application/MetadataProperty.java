@@ -3,10 +3,12 @@ package org.uengine.bss.application;
 import org.metaworks.MetaworksContext;
 import org.metaworks.ServiceMethodContext;
 import org.metaworks.annotation.*;
+import org.uengine.codi.mw3.selfservice.SelfServiceControlPanel;
+
+import java.io.FileNotFoundException;
 
 @Face(options = {"hideTitle"}, values = {"true"})
 public class MetadataProperty<T> {
-
 
 
     String key;
@@ -46,6 +48,18 @@ public class MetadataProperty<T> {
         this.type = type;
     }
 
+    String id;
+
+    @Id
+    @Hidden
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     MetaworksContext metaworksContext;
 
     public MetaworksContext getMetaworksContext() {
@@ -56,6 +70,9 @@ public class MetadataProperty<T> {
         this.metaworksContext = metaworksContext;
     }
 
+    @AutowiredFromClient
+    public SelfServiceControlPanel selfServiceControlPanel;
+
     @ServiceMethod(eventBinding = "change", bindingFor = "type", target = ServiceMethodContext.TARGET_SELF)
     public MetadataProperty changeType(@Payload("type") String type) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         MetadataProperty metadataProperty = (MetadataProperty) Class.forName(getClass().getPackage().getName() + "." + type + "MetadataProperty").newInstance();
@@ -63,4 +80,20 @@ public class MetadataProperty<T> {
         return metadataProperty;
     }
 
+    @Hidden
+    @ServiceMethod(callByContent = true, target = ServiceMethodContext.TARGET_AUTO)
+    public MetadataProperty showPropertyDetail() throws Exception {
+        MetadataProperty detailProperty = this;
+        detailProperty.setId("metaDetailView");
+        detailProperty.getMetaworksContext().setWhen(MetaworksContext.WHEN_EDIT);
+        detailProperty.getMetaworksContext().setWhere("ssp");
+
+        return detailProperty;
+    }
+
+    @ServiceMethod(callByContent = true)
+    public void save() throws Exception {
+        System.out.println(selfServiceControlPanel);
+        selfServiceControlPanel.save(selfServiceControlPanel.getMetadataPropertyList().indexOf(this));
+    }
 }
