@@ -35,11 +35,4 @@ public class MetadataFile extends MetaworksFile{
     public String overrideUploadPathPrefix() {
         return TenantApp.getGarudaAppPath(getAppId(),getTenantId());
     }
-
-    @Override
-    public Object[] upload() throws FileNotFoundException, IOException, Exception {
-        Object[] object = super.upload();
-        getMetaworksContext().setWhen("attach");
-        return object;
-    }
 }

@@ -96,17 +96,6 @@ public class SelfServiceControlPanel {
         this.appName = appName;
     }
 
-    String comName;
-
-    @Hidden
-    public String getComName() {
-        return comName;
-    }
-
-    public void setComName(String comName) {
-        this.comName = comName;
-    }
-
     public SelfServiceControlPanel() {
 
     }
