@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.ClientProtocolException;
 import org.oce.garuda.multitenancy.TenantContext;
+import org.oce.garuda.multitenancy.TenantSpecificUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -26,11 +27,14 @@ import org.uengine.garuda.client.user.service.UserService;
 @Controller
 public class UserController {
 	@Autowired
+	TenantSpecificUtil tenantSpecificUtil;
+
+	@Autowired
 	UserService userService;
-	
-    @Value("${service.appId}")  
-    private String appId;  
-    
+
+    @Value("${service.appId}")
+    private String appId;
+
     @Value("${service.domain}")  
     private String domain;  
 	
@@ -62,11 +66,9 @@ public class UserController {
 	
 	@RequestMapping("/main")
 	public String main(Model model, HttpSession session ) throws IOException {
-		TenantContext tenantContext = TenantContext.getThreadLocalInstance();
 		model.addAttribute("appId", appId);
-		model.addAttribute("domain", domain);
-		model.addAttribute("companyName", MetadataServiceClient.getTextMetadata(domain,appId,tenantContext.getTenantId(),
-				"companyName"));
+		model.addAttribute("domain", getDomain());
+		model.addAttribute("companyName", tenantSpecificUtil.getMetadata("companyName"));
 		return "main";
 	}
 	
@@ -105,5 +107,14 @@ public class UserController {
 	public String intertalExceptionHandler(Exception ex){
 		System.out.println(ex.getMessage());
 	    return ex.getMessage();
+	}
+
+	private String getTenantId(){
+		TenantContext tenantContext = TenantContext.getThreadLocalInstance();
+		return tenantContext.getTenantId();
+	}
+
+	private String getDomain(){
+		return domain.replace("www", getTenantId());
 	}
 }

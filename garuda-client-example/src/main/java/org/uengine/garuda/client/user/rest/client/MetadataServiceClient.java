@@ -11,8 +11,7 @@ import java.io.IOException;
  */
 public class MetadataServiceClient {
     public static String getTextMetadata(String domain, String appId, String tenantId, String keyValue) throws IOException {
-        ClientResource resource = new ClientResource(domain + "/services/metadata/app/" + appId + "/tenant/" + tenantId
-                + "/text/" + keyValue);
+        ClientResource resource = new ClientResource(domain + "/services/metadata/app/" + appId + "/text/" + keyValue);
 
         Representation response = resource.get();
 

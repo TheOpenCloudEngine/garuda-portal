@@ -12,16 +12,15 @@ import java.io.FileNotFoundException;
 public interface MetadataService {
 
     @GET
-    @Path("/app/{appId}/tenant/{tenantId}/text/{key}")
+    @Path("/app/{appId}/text/{key}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Response getTextMetadata(@PathParam("appId") String appId,@PathParam("tenantId") String tenantId,
-                                  @PathParam("key") String key) throws FileNotFoundException;
+    public Response getTextMetadata(@PathParam("appId") String appId, @PathParam("key") String key)
+            throws FileNotFoundException;
 
     @GET
-    @Path("/app/{appId}/tenant/{tenantId}/image/{key}")
+    @Path("/app/{appId}/image/{key}")
     @Produces({"image/png", "image/jpg", "image/gif"})
-    public Response getImageMetadata(@PathParam("appId") String appId,@PathParam("tenantId") String tenantId,
-                                  @PathParam("key") String key)
+    public Response getImageMetadata(@PathParam("appId") String appId,@PathParam("key") String key)
             throws FileNotFoundException;
 
 }

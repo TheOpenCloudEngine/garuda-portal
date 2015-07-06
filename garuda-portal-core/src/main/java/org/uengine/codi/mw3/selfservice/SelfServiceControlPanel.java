@@ -69,7 +69,7 @@ public class SelfServiceControlPanel {
     @ServiceMethod(callByContent = true)
     public void popupApp() throws Exception { //TODO naming -> appSelected() is better ==> 영어공부 좀 할 필]
 
-        this.setMetadataPropertyList(TenantApp.load(appName, comName).getMetadataPropertyList());
+        this.setMetadataPropertyList(TenantApp.load(appName).getMetadataPropertyList());
 
         Iterator iterator = this.getMetadataPropertyList().iterator();
         while(iterator.hasNext()){
@@ -83,7 +83,6 @@ public class SelfServiceControlPanel {
     public void save() throws FileNotFoundException {
         TenantApp tenantApp = new TenantApp();
         tenantApp.setId(appName);
-        tenantApp.setTenantid(comName);
         tenantApp.setMetadataPropertyList(this.getMetadataPropertyList());
         tenantApp.save();
     }

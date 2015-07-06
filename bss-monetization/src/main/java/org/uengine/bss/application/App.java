@@ -56,17 +56,6 @@ public class App implements ContextAware{
 			this.description = description;
 		}
 
-	public String tenantid;
-	@Order(4)
-	@Hidden
-	@Group(name="Basic")
-		public String getTenantid() {
-			return tenantid;
-		}
-		public void setTenantid(String tenantid) {
-			this.tenantid = tenantid;
-		}
-
 	public List<Plan> planList = new ArrayList<Plan>();
 		@Face(faceClass = PlanListFace.class)
 		@Order(5)

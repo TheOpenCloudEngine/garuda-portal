@@ -7,6 +7,7 @@ import org.metaworks.annotation.Payload;
 import org.metaworks.annotation.ServiceMethod;
 import org.metaworks.dao.TransactionContext;
 import org.metaworks.widget.ModalWindow;
+import org.oce.garuda.multitenancy.TenantContext;
 import org.uengine.bss.monetization.*;
 import org.uengine.kernel.GlobalContext;
 
@@ -77,6 +78,11 @@ public class TenantApp extends App{
         return garudaAppFile;
     }
 
+    public static String getTenantId(){
+        TenantContext tenantContext = TenantContext.getThreadLocalInstance();
+        return tenantContext.getTenantId();
+    }
+
     @ServiceMethod(callByContent = true)
     public Object save() throws FileNotFoundException {
         XStream xstream = new XStream();
@@ -86,7 +92,7 @@ public class TenantApp extends App{
         for(MetadataProperty metadataProperty : getMetadataPropertyList()){
             if(metadataProperty instanceof FileMetadataProperty){
                 try {
-                    ((FileMetadataProperty) metadataProperty).upload(getId(),getTenantid());
+                    ((FileMetadataProperty) metadataProperty).upload(getId(), getTenantId());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -94,7 +100,7 @@ public class TenantApp extends App{
         }
 
         try {
-            File f = TenantApp.getFileOfGarudaApp(getId(), getTenantid(), UENGINE_METADATA_FILE);
+            File f = TenantApp.getFileOfGarudaApp(getId(), getTenantId(), UENGINE_METADATA_FILE);
             System.out.println("Wrote file to " + f.getAbsolutePath());
             xstream.toXML(this, new OutputStreamWriter(new FileOutputStream(f), "utf-8"));
         } catch (UnsupportedEncodingException e) {
@@ -108,14 +114,10 @@ public class TenantApp extends App{
 
     @ServiceMethod(target= ServiceMethodContext.TARGET_SELF)
     public static TenantApp load(@Payload("id") String appId) throws FileNotFoundException {
-        return TenantApp.load(appId, null);
-    }
-
-    public static TenantApp load(String appId, String tenantId) throws FileNotFoundException {
         XStream xstream = new XStream();
         xstream.autodetectAnnotations(true);
 
-        File uengine_metadata_file = TenantApp.getFileOfGarudaApp(appId, tenantId, UENGINE_METADATA_FILE);
+        File uengine_metadata_file = TenantApp.getFileOfGarudaApp(appId, getTenantId(), UENGINE_METADATA_FILE);
         if(!uengine_metadata_file.exists()){
             uengine_metadata_file = TenantApp.getDefaultFileOfGarudaApp(appId, UENGINE_METADATA_FILE);
         }
@@ -127,7 +129,7 @@ public class TenantApp extends App{
                 MetadataFile metadataFile = (MetadataFile) metadataProperty.getDefaultValue();
                 if(metadataFile != null){
                     metadataFile.setAppId(appId);
-                    metadataFile.setTenantId(TenantApp.getTenantFolder(tenantId));
+                    metadataFile.setTenantId(TenantApp.getTenantFolder(getTenantId()));
                 }
             }
         }
@@ -166,6 +168,5 @@ public class TenantApp extends App{
 
         return app;
     }
-
 }
 

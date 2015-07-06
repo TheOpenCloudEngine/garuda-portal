@@ -23,8 +23,8 @@ import java.util.Objects;
 public class MetadataServiceImpl implements MetadataService{
 
     @Override
-    public Response getTextMetadata(String appId, String tenantId, String key) throws FileNotFoundException {
-        TenantApp app = TenantApp.load(appId, tenantId);
+    public Response getTextMetadata(String appId, String key) throws FileNotFoundException {
+        TenantApp app = TenantApp.load(appId);
         List<MetadataProperty> metadataPropertyList= app.getMetadataPropertyList();
 
         String returnMsg = "";
@@ -43,14 +43,14 @@ public class MetadataServiceImpl implements MetadataService{
     }
 
     @Override
-    public Response getImageMetadata(String appId, String tenantId, String key) throws FileNotFoundException {
-        TenantApp app = TenantApp.load(appId,tenantId);
+    public Response getImageMetadata(String appId, String key) throws FileNotFoundException {
+        TenantApp app = TenantApp.load(appId);
         File imageFile = null;
 
         for(MetadataProperty metadataProperty : app.getMetadataPropertyList()){
             if(metadataProperty instanceof FileMetadataProperty && Objects.equals(key, metadataProperty.getKey())){
                 String fileName = ((MetadataFile) metadataProperty.getDefaultValue()).getUploadedPath();
-                imageFile = TenantApp.getFileOfGarudaApp(appId, tenantId, fileName);
+                imageFile = TenantApp.getFileOfGarudaApp(appId, TenantApp.getTenantId(), fileName);
                 if(!imageFile.exists()){
                     imageFile = TenantApp.getDefaultFileOfGarudaApp(appId, fileName);
                 }
