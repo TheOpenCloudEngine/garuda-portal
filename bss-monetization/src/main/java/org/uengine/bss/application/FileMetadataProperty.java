@@ -37,12 +37,12 @@ public class FileMetadataProperty extends MetadataProperty<MetadataFile> {
     }
 
     public void upload(String appId, String tenantId) throws Exception {
-        getDefaultValue().setAppId(appId);
-        getDefaultValue().setTenantId(tenantId);
-//        if(getDefaultValue().getUploadedPath() == null ||
-//                (getDefaultValue().getUploadedPath() != null && getDefaultValue().getDeletedPath() != null)){
+        if(getDefaultValue().getUploadedPath() == null ||
+                (getDefaultValue().getUploadedPath() != null && getDefaultValue().getDeletedPath() != null)){
+            getDefaultValue().setAppId(appId);
+            getDefaultValue().setTenantId(tenantId);
             getDefaultValue().upload();
-//        }
+        }
     }
 
     @ServiceMethod(callByContent=true, bindingHidden=true, bindingFor="defaultValue", eventBinding={"change"} ,target= ServiceMethodContext.TARGET_APPEND)

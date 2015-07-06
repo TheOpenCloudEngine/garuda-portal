@@ -117,22 +117,13 @@ public class TenantApp extends App{
         XStream xstream = new XStream();
         xstream.autodetectAnnotations(true);
 
+        // Tenant 별로 메타데이타 파일이 없으면 정의된 디폴드 파일을 찾는다.
         File uengine_metadata_file = TenantApp.getFileOfGarudaApp(appId, getTenantId(), UENGINE_METADATA_FILE);
         if(!uengine_metadata_file.exists()){
             uengine_metadata_file = TenantApp.getDefaultFileOfGarudaApp(appId, UENGINE_METADATA_FILE);
         }
 
         TenantApp app = (TenantApp) xstream.fromXML(new InputStreamReader(new FileInputStream(uengine_metadata_file), StandardCharsets.UTF_8));
-
-        for(MetadataProperty metadataProperty : app.getMetadataPropertyList()){
-            if(metadataProperty instanceof FileMetadataProperty){
-                MetadataFile metadataFile = (MetadataFile) metadataProperty.getDefaultValue();
-                if(metadataFile != null){
-                    metadataFile.setAppId(appId);
-                    metadataFile.setTenantId(TenantApp.getTenantFolder(getTenantId()));
-                }
-            }
-        }
 
         // Init Plan service information.
         List<Service> serviceList = app.getServiceList();
