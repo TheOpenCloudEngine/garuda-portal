@@ -3,6 +3,9 @@ package org.uengine.bss.application;
 import org.metaworks.MetaworksFile;
 import org.uengine.util.UEngineUtil;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * Created by hoo.lim on 6/30/2015.
  */
@@ -31,5 +34,12 @@ public class MetadataFile extends MetaworksFile{
     @Override
     public String overrideUploadPathPrefix() {
         return TenantApp.getGarudaAppPath(getAppId(),getTenantId());
+    }
+
+    @Override
+    public Object[] upload() throws FileNotFoundException, IOException, Exception {
+        Object[] object = super.upload();
+        getMetaworksContext().setWhen("attach");
+        return object;
     }
 }
