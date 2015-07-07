@@ -40,7 +40,7 @@
     </button>
 </div>
 
-<img src="${domain}/services/metadata/app/${appId}/image/companyLogo" class="img-rounded" width="200px" height="100px">
+<img src="${domain}/services/tenantImage/${appId}/companyLogo" class="img-rounded" width="200px" height="100px">
 
 <h1>Company name is ${companyName}.</h1>
 

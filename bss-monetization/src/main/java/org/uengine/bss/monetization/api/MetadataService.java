@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 /**
  * Created by hoo.lim on 6/29/2015.
  */
-@Path("/metadata")
+@Path("/tenantImage")
 public interface MetadataService {
 
     @GET
@@ -18,7 +18,7 @@ public interface MetadataService {
             throws FileNotFoundException;
 
     @GET
-    @Path("/app/{appId}/image/{key}")
+    @Path("/{appId}/{key}")
     @Produces({"image/png", "image/jpg", "image/gif"})
     public Response getImageMetadata(@PathParam("appId") String appId,@PathParam("key") String key)
             throws FileNotFoundException;
