@@ -2,6 +2,9 @@ package org.uengine.garuda.selfservice;
 
 import org.oce.garuda.multitenancy.TenantContext;
 import org.oce.garuda.multitenancy.TenantSpecific;
+import org.restlet.data.Form;
+import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,6 +35,7 @@ public class BasicServlet extends HttpServlet{
         TenantContext tenantContext = TenantContext.getThreadLocalInstance();
         String tenantId = tenantContext.getTenantId();
 
+
         // 테넌트가 널값이 아니면 GARUDA서버 도메인을 수정(http://gms.processcodi.com)
         if(tenantId != null){
             request.setAttribute("GARUDA_SERVER", GARUDA_SERVER.replace("www", tenantId));
@@ -40,6 +44,7 @@ public class BasicServlet extends HttpServlet{
         }
         request.setAttribute("TENANT_ID", tenantId);
         request.setAttribute("APP_ID", APP_ID);
+
 
         // 웹 서비스를 호출하여 텍스트 메타데이타를 가져온다.
         URL wsdlURL = new URL(GARUDA_SERVER + "/services/TenantSpecific?wsdl");
@@ -50,6 +55,28 @@ public class BasicServlet extends HttpServlet{
 
         request.setAttribute("TEXT_METADATA", result);
         request.setAttribute("FILE_METADATA", FILE_METADATA_KEY);
+
+
+        // url에서 테넌트 인식해서 가입 안된 사용자면 자동적으로 가입하게 처리
+        if(tenantId != null){
+            ClientResource resource = new ClientResource("http://www.processcodi.com:8080/services/tenant/signUp");
+
+            Form form = new Form();
+            form.add("tenantId", tenantId);
+            form.add("tenantName", tenantId);
+            form.add("userId", tenantId);
+            form.add("userName", tenantId);
+            form.add("password", tenantId);
+
+            // Write the response entity on the console
+            try {
+                resource.post(form).write(System.out);
+            } catch (ResourceException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         // selfservice.jsp 페이지로 이동
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/selfservice.jsp");

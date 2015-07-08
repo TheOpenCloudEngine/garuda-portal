@@ -9,9 +9,9 @@ import java.net.URL;
  * Created by hoo.lim on 7/8/2015.
  */
 
-public class WebServiceCallTest {
+public class TenantSpecficTest {
     @Test
-    public void testWebServiceCall(){
+    public void testGetMetadata(){
             try{
                 URL wsdlURL = new URL("http://www.processcodi.com:8080/services/TenantSpecific?wsdl");
                 QName SERVICE_NAME = new QName("http://multitenancy.garuda.uengine.org/", "TenantSpecificImplService");
