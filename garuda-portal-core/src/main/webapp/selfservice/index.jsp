@@ -15,32 +15,32 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
 		<!-- jquery -->
-		<script type="text/javascript" src="scripts/jquery/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="scripts/jquery/jquery-ui-1.8.23.custom.min.js"></script> 
-		<script type="text/javascript" src="scripts/jquery/jquery.layout-latest.js"></script>
-		<script type="text/javascript" src="scripts/jquery/jquery.center.js"></script>
-		<script type="text/javascript" src="scripts/jquery/jquery.msg.js"></script>
-		<script type='text/javascript' src='scripts/jquery/jquery.textPlaceholder.js'></script>
+		<script type="text/javascript" src="../scripts/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../scripts/jquery/jquery-ui-1.8.23.custom.min.js"></script>
+		<script type="text/javascript" src="../scripts/jquery/jquery.layout-latest.js"></script>
+		<script type="text/javascript" src="../scripts/jquery/jquery.center.js"></script>
+		<script type="text/javascript" src="../scripts/jquery/jquery.msg.js"></script>
+		<script type='text/javascript' src='../scripts/jquery/jquery.textPlaceholder.js'></script>
 		
 		
 		<!-- jquery css -->
-		<link rel="stylesheet" type="text/css" href="scripts/jquery/jquery-ui-189custom/css/ui-lightness/jquery-ui-1.8.9.custom.css" />
-		<link rel="stylesheet" type="text/css" href="scripts/jquery/jquery-ui-189custom/development-bundle/themes/base/jquery.ui.all.css" />
-		<link rel="stylesheet" type="text/css" href="scripts/jquery/jquery.msg.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="../scripts/jquery/jquery-ui-189custom/css/ui-lightness/jquery-ui-1.8.9.custom.css" />
+		<link rel="stylesheet" type="text/css" href="../scripts/jquery/jquery-ui-189custom/development-bundle/themes/base/jquery.ui.all.css" />
+		<link rel="stylesheet" type="text/css" href="../scripts/jquery/jquery.msg.css" media="screen" />
 
 		<!-- iconmoon -->
-		<link rel="stylesheet" href="style/icomoon/style.css">
+		<link rel="stylesheet" href="../style/icomoon/style.css">
 		<!--[if lt IE 8]><!-->
-		<link rel="stylesheet" href="style/icomoon/ie7/ie7.css">
+		<link rel="stylesheet" href="../style/icomoon/ie7/ie7.css">
 		<!--<![endif]-->
 		
 		
 		<!-- bootstrap -->
-		<link rel="stylesheet" type="text/css" href="style/bootstrap-3.0.2/dist/css/bootstrap.css" media="screen" />
-		<script src="style/bootstrap-3.0.2/dist/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../style/bootstrap-3.0.2/dist/css/bootstrap.css" media="screen" />
+		<script src="../style/bootstrap-3.0.2/dist/js/bootstrap.min.js"></script>
 
 		<!-- Just for debugging purposes. Don't actually copy this line! -->
-	    <!--[if lt IE 9]><script src="style/bootstrap-3.0.2/docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+	    <!--[if lt IE 9]><script src="../style/bootstrap-3.0.2/docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 	
 	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!--[if lt IE 9]>
@@ -52,83 +52,83 @@
 
 
 		<!-- metaowkrs for json2 (ie7) -->
- 		<script type="text/javascript" src="scripts/json/json2.js"></script>
+ 		<script type="text/javascript" src="../scripts/json/json2.js"></script>
 
 		<!-- metaworks for keyboard mapping -->
-		<script type="text/javascript" src="scripts/shortcut.js"></script>
+		<script type="text/javascript" src="../scripts/shortcut.js"></script>
 		
 		<!-- metaworks for context menu, import YUI -->
-		<script type="text/javascript" src="scripts/yui-3.2.0-min.js"></script>
-		<link rel="stylesheet" type="text/css" href="style/menu/reset.css">
-		<link rel="stylesheet" type="text/css" href="style/menu/container.css">
-		<link rel="stylesheet" type="text/css" href="style/menu/sam/menu.css">
-		<script type="text/javascript" src="scripts/yui/build/utilities/utilities.js"></script>
-		<script type="text/javascript" src="scripts/yui/build/container/container.js"></script>
-		<script type="text/javascript" src="scripts/yui/build/menu/menu.js"></script>
+		<script type="text/javascript" src="../scripts/yui-3.2.0-min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../style/menu/reset.css">
+		<link rel="stylesheet" type="text/css" href="../style/menu/container.css">
+		<link rel="stylesheet" type="text/css" href="../style/menu/sam/menu.css">
+		<script type="text/javascript" src="../scripts/yui/build/utilities/utilities.js"></script>
+		<script type="text/javascript" src="../scripts/yui/build/container/container.js"></script>
+		<script type="text/javascript" src="../scripts/yui/build/menu/menu.js"></script>
 	 	
 		
 		<!-- metaworks for ejs engine -->
-		<script type="text/javascript" src="scripts/ejs/ejs.js"></script>
-		<script type="text/javascript" src="scripts/ejs/ejs_debugger.js"></script>
-		<script type="text/javascript" src="scripts/ejs/view.js"></script>
+		<script type="text/javascript" src="../scripts/ejs/ejs.js"></script>
+		<script type="text/javascript" src="../scripts/ejs/ejs_debugger.js"></script>
+		<script type="text/javascript" src="../scripts/ejs/view.js"></script>
 	
 	
 		<!-- substitue for ejs engine (jQote2) -->		
-		<script type="text/javascript" src="scripts/jquery/jquery.jqote2.js"></script>
+		<script type="text/javascript" src="../scripts/jquery/jquery.jqote2.js"></script>
 	
 		<!-- metaworks engine -->
-	  	<script type='text/javascript' src='dwr/engine.js'></script> 
-	  	<script type='text/javascript' src='dwr/util.js'></script>	  
-	  	<script type='text/javascript' src='dwr/interface/Metaworks.js'></script> 
-	  	<script type="text/javascript" src="dwr/metaworks/scripts/metaworks.js"></script>
+	  	<script type='text/javascript' src='../dwr/engine.js'></script>
+	  	<script type='text/javascript' src='../dwr/util.js'></script>
+	  	<script type='text/javascript' src='../dwr/interface/Metaworks.js'></script>
+	  	<script type="text/javascript" src="../dwr/metaworks/scripts/metaworks.js"></script>
 
 
 		<!-- user scripts -->
-		<script type='text/javascript' src='scripts/common.js'></script>				
-		<script type='text/javascript' src='scripts/jquery/timeago/jquery.timeago.js'></script>				
+		<script type='text/javascript' src='../scripts/common.js'></script>				
+		<script type='text/javascript' src='../scripts/jquery/timeago/jquery.timeago.js'></script>				
 		 
 		<!-- user css -->
-		<link rel="stylesheet" type="text/css" href="style/themes/droppable_layout.css" />
-		<link rel="stylesheet" type="text/css" href="style/themes/waveStyle/wave_theme.css" />
+		<link rel="stylesheet" type="text/css" href="../style/themes/droppable_layout.css" />
+		<link rel="stylesheet" type="text/css" href="../style/themes/waveStyle/wave_theme.css" />
 		
 		<!-- smart tab -->
-		<link rel="stylesheet" type="text/css" href="style/smartTab.css">				
-		<script type="text/javascript" src="scripts/jquery/jquery.smartTab.js"></script>
+		<link rel="stylesheet" type="text/css" href="../style/smartTab.css">				
+		<script type="text/javascript" src="../scripts/jquery/jquery.smartTab.js"></script>
 
 		<!-- for ckeditor -->
-		<script type='text/javascript' src='scripts/ckeditor_3.6.3/ckeditor/ckeditor.js'></script>
+		<script type='text/javascript' src='../scripts/ckeditor_3.6.3/ckeditor/ckeditor.js'></script>
 
 
 		<!-- for Big Blue Button -->
-		<script type='text/javascript' src='scripts/sha1.js'></script>
+		<script type='text/javascript' src='../scripts/sha1.js'></script>
 		
 		<!-- for check date -->
-		<script type='text/javascript' src='scripts/datejs/date_kr.js'></script>
+		<script type='text/javascript' src='../scripts/datejs/date_kr.js'></script>
 
 		<!-- mw3 component -->
-		<link rel="stylesheet" type="text/css" href="style/uclipse.css" />
+		<link rel="stylesheet" type="text/css" href="../style/uclipse.css" />
 		 
 		<!-- popup -->
- 		<link rel="stylesheet" href="scripts/jquery/cluetip/jquery.cluetip.css" />
+ 		<link rel="stylesheet" href="../scripts/jquery/cluetip/jquery.cluetip.css" />
 		
 		<!-- for open graph -->
-		<script type="text/javascript" src="scripts/opengraph/OpenGraph-0.1-SNAPSHOT.js"></script>
+		<script type="text/javascript" src="../scripts/opengraph/OpenGraph-0.1-SNAPSHOT.js"></script>
 		
 	    <!-- for open presentation -->
-	    <link rel="stylesheet" type="text/css" href="scripts/presentation/jmpressStyle.css" />
-		<script type="text/javascript" src="scripts/presentation/jmpress.all.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../scripts/presentation/jmpressStyle.css" />
+		<script type="text/javascript" src="../scripts/presentation/jmpress.all.js"></script>
 		
-		<script type="text/javascript" src="scripts/jquery/jqueryCycle/jquery.cycle2.js"></script>
-		<script type="text/javascript" src="scripts/jquery/jqueryCycle/jquery.cycle2.carousel.js"></script> 
-	    <script type="text/javascript" src="scripts/jquery/jqueryCycle/jquery.cycle2.center.js"></script> 
+		<script type="text/javascript" src="../scripts/jquery/jqueryCycle/jquery.cycle2.js"></script>
+		<script type="text/javascript" src="../scripts/jquery/jqueryCycle/jquery.cycle2.carousel.js"></script> 
+	    <script type="text/javascript" src="../scripts/jquery/jqueryCycle/jquery.cycle2.center.js"></script> 
 
-		<script src="scripts/ace-1.1.0/build/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-		<script src="scripts/ace-1.1.0/build/src-noconflict/ext-static_highlight.js"></script>
+		<script src="../scripts/ace-1.1.0/build/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../scripts/ace-1.1.0/build/src-noconflict/ext-static_highlight.js"></script>
 				
 		<!-- full calendar -->
-		<script type="text/javascript" src="scripts/jquery/fullcalendar/fullcalendar.min.js"></script>
+		<script type="text/javascript" src="../scripts/jquery/fullcalendar/fullcalendar.min.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="scripts/jquery/fullcalendar/fullcalendar.css" />
+		<link rel="stylesheet" type="text/css" href="../scripts/jquery/fullcalendar/fullcalendar.css" />
 		
  		<script type="text/javascript">
  			// no convert for face helper variable and start with '__' char variable
@@ -392,7 +392,8 @@
             	    runner.run();
 				
 				}else{
-	 				var appName = request.getParameter("appName")!=null?request.getParameter("appName"):"";	
+                    var locationSplitArray = location.href.split("/");
+	 				var appName = locationSplitArray[locationSplitArray.length-1];
 	 				var loader = new MetaworksObject({
 	 					__className: 'org.uengine.codi.mw3.selfservice.SelfServiceControlPanel',
 	 					appName: appName,
