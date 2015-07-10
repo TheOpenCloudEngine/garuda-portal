@@ -21,7 +21,7 @@ import java.net.URL;
  */
 public class BasicServlet extends HttpServlet{
 
-    private final static String APP_ID = "ITNadeApp";
+    private final static String APP_ID = "demo";
 
     private final static String GARUDA_SERVER = "http://www.processcodi.com:8080";
 

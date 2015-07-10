@@ -1,0 +1,151 @@
+= OCE DEVELOPER PORTAL 설치 및 실행 메뉴얼
+
+Doc Writer <limhoo@uengine.org>
+v2.0.0, 2015-07-10:
+:doctype: book
+:source-highlighter: coderay
+:listing-caption: Listing
+:sectnums:
+:toc:
+:toc-title: 목차
+:toclevels: 4
+ifdef::backend-pdf[]
+:pagenums:
+:pygments-style: bw
+:source-highlighter: pygments
+endif::[]
+:imagesdir: images
+:homepage: http://www.uengine.org
+
+
+본 문서는 1	OCE DEVELOPER PORTAL 샘플 앱에 대한 설치 및 실행환경을 간략히 서술한 메뉴얼이다.
+
+== 1. OCE DEVELOPER PORTAL 에서 샘플 앱 정보를 설정
+
+이번 메뉴얼에서는 OCE DEVELOPER PORTAL 도메인을http://www.processcodi.com:8080으로 사용하였다. 상황에 따라서 다른 도메인을 사용할수 있다.
+
+=== 1.1 OCE DEVELOPER PORTAL 회원가입
+
+==== 1.1.1 OCE DEVELOPER PORTAL 사이트 접속한다.
+
+image::01.Index.png[width=800]
+
+==== 1.1.2 로그인할 사용자가 없으면 회원가입 버튼을 클릭한다.
+
+image::02.SignUp.png[width=800]
+
+==== 1.1.3 회원가입으로 사용할 이메일을 입력한다.
+
+image::03.SendRequestEmail.png[width=800]
+
+==== 1.1.4 회원가입요청을 이메일로 성공적으로 보냈다.
+
+image::04.SendSuccess.png[width=800]
+
+==== 1.1.5 회원가입요청을 이메일로 받는다. 회원가입을 시작한다.
+
+image::05.EmailMemberSignUp.png[width=800]
+
+==== 1.1.6 이름과 비밀번호를 입력한다.
+
+image::06.PortalSignUp01.png[width=800]
+
+==== 1.1.7 개인 로고 이미지를 선택하고 회원가입을 완료한다.
+
+image::07.PortalSignUp02.png[width=800]
+
+=== 1.2 OCE DEVELOPER PORTAL 에서 샘플 앱 정보를 설정
+
+==== 1.2.1 새 앱을 클릭하고 demo 프로젝트를 생성한다.
+
+image::08.CreateProject.png[width=800]
+
+==== 1.2.2 코디 상단 메뉴에서 앱 스토어 이미지를 클릭한다.
+
+image::08.GoToAppStore.png[width=800]
+
+==== 1.2.3 프로젝트 demo로 앱 demo를 등록한다.
+
+image::09.AppRegister.png[width=800]
+
+==== 1.2.4 생성한 demo 앱을 공개한다.
+
+image::10.AppPublish.png[width=800]
+
+==== 1.2.5 앱을 공개후 메타데이터 관리 버튼을 클릭하여 메타데이터 관리 화면으로 넘어간다..
+
+image::11.MetadataManage.png[width=800]
+
+==== 1.2.6 companyName 텍스트 메타데이터와 companyLogo파일 메타데이터를 생성한다.
+
+image::12.NewMetadata.png[width=800]
+
+== 2. OCE DEVELOPER PORTAL 샘플 앱을 설치한다
+
+=== 2.1 아래의 GitHub주소에서 샘플 앱 프로젝트를 다운 받는다.
+
+[source]
+----
+https://github.com/TheOpenCloudEngine/garuda-portal/tree/master/garuda-selfservice-example
+----
+
+=== 2.2 다운 받은 샘플 앱 BasicServlet.java파일에서 OCE DEVELOPER PORTAL 앱 접속 정보를 설정한다.
+
+[source,java]
+----
+public class BasicServlet extends HttpServlet{
+
+    private final static String APP_ID = "demo";
+
+    private final static String GARUDA_SERVER = "http://www.processcodi.com:8080";
+
+    private final static String TEXT_METADATA_KEY = "companyName";
+
+    private final static String FILE_METADATA_KEY = "companyLogo";
+
+----
+
+.Windtrainer workouts
+[width="80%",options="header"]
+|=========================================================
+|필드 이름 |설명
+|APP_ID	            |코디에서 등록한 앱 이름
+|GARUDA_SERVER	    |코디 도메인(www 포함)
+|TEXT_METADATA_KEY	|생성한 텍스트 메타데이터 키
+|FILE_METADATA_KEY	|생성한 파일 메타데이터 키
+|=========================================================
+
+=== 2.3 Tomcat에서 샘플앱을 실행한다.
+
+hosts파일에서 샘플 앱을 위하여 테스트용으로 도메인을 하나 만들어 준다.
+
+[source, host]
+----
+127.0.0.1   gms.garuda.com
+----
+
+샘플 앱에서 TenantAwareFilter 통하여 도메인을 파싱하여 테넌트를 얻는다.
+
+
+[source]
+----
+tenantId.xxx.com // 도메인을 .으로 파싱한 첫번재 텍스트를 도메인으로 인식
+----
+
+demo 앱에 있는 텍스트와 파일 메타데이터를 가져와서 화면에 보여준다.
+
+image::13.ShowMetadata.png[width=800]
+
+=== 2.4 샘플 앱에서 셀프 서비스를 통하여 메타데이터를 관리한다
+
+image::14.ChangeTextMetadata.png[width=800]
+
+image::15.ChangeFileMetadata.png[width=800]
+
+=== 2.5 셈플앱을 Refresh한다.
+
+image::16.RefreshMetadata.png[width=800]
+
+
+
+
