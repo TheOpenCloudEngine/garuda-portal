@@ -22,7 +22,6 @@
         <jackson.mapper.version>1.9.13</jackson.mapper.version>
         <mybatis.version>3.2.3</mybatis.version>
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
-        <restlet.version>2.2-RC4</restlet.version>
     </properties>
 
     <dependencies>
