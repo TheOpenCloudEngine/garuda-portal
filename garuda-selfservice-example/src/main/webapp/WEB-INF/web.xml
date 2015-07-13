@@ -22,14 +22,18 @@
          version="3.0">
     <display-name>Garuda-Selfservice-Example</display-name>
     <description>This is Garuda Self Service Example.</description>
-    
-    <servlet>
-        <servlet-name>BasicServlet</servlet-name>
-        <servlet-class>org.uengine.garuda.selfservice.BasicServlet</servlet-class>
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>BasicServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    <welcome-file-list>
+        <welcome-file>tenantSignUp1.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

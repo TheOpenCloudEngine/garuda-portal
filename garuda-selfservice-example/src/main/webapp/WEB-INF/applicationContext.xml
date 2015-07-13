@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	    http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+
+    <bean id="metadataServer" class="java.lang.String">
+        <constructor-arg value="processcodi.com:8080"/>
+    </bean>
+
+    <jaxws:client id="tenantSpecificClient"
+                  serviceClass="org.oce.garuda.multitenancy.TenantSpecific"
+                  address="#{'http://' + metadataServer + '/services/TenantSpecific'}" />
+
+    <bean id="tenantSpecificUtil" class="org.oce.garuda.multitenancy.TenantSpecificUtil">
+        <property name="appKey" value="HelloApp" />
+        <property name="tenantSpecific" ref="tenantSpecificClient" />
+        <property name="metadataServer" ref="metadataServer"/>
+    </bean>
+</beans>
