@@ -27,9 +27,9 @@
 
 	<h2 style="margin-left: 40px;">Tenant 가입이 성공되였습니다.</h2><br/><br/>
 
-	<a href="http://<%=tenantId%>.garuda.com:9090/selfservice.jsp"
+	<a href="http://<%=tenantId%>.garuda.com:9090/main.jsp"
 	   class="btn btn-default btn-lg active" role="button">Tenant Self Service Page</a>
 
-	<h3>http://<%=tenantId%>.garuda.com:9090/selfservice.jsp</h3>
+	<h3>http://<%=tenantId%>.garuda.com:9090/main.jsp</h3>
 </body>
 </html>

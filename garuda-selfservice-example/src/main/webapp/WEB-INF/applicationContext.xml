@@ -11,7 +11,7 @@
 
 
     <bean id="metadataServer" class="java.lang.String">
-        <constructor-arg value="processcodi.com:8080"/>
+        <constructor-arg value="oce-live.com"/>
     </bean>
 
     <jaxws:client id="tenantSpecificClient"

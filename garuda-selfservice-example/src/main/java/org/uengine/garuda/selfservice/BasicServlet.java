@@ -78,8 +78,8 @@ public class BasicServlet extends HttpServlet{
             }
         }
 
-        // selfservice.jsp 페이지로 이동
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/selfservice.jsp");
+        // main.jsp 페이지로 이동
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/main.jsp");
         requestDispatcher.forward(request,response);
     }
 }
