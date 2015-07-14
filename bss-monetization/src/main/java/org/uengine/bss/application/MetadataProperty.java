@@ -1,6 +1,7 @@
 package org.uengine.bss.application;
 
 import org.metaworks.MetaworksContext;
+import org.metaworks.Refresh;
 import org.metaworks.ServiceMethodContext;
 import org.metaworks.annotation.*;
 import org.uengine.codi.mw3.selfservice.SelfServiceControlPanel;
@@ -70,9 +71,6 @@ public class MetadataProperty<T> {
         this.metaworksContext = metaworksContext;
     }
 
-    @AutowiredFromClient
-    public SelfServiceControlPanel selfServiceControlPanel;
-
     @ServiceMethod(eventBinding = "change", bindingFor = "type", target = ServiceMethodContext.TARGET_SELF)
     public MetadataProperty changeType(@Payload("type") String type) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         MetadataProperty metadataProperty = (MetadataProperty) Class.forName(getClass().getPackage().getName() + "." + type + "MetadataProperty").newInstance();
@@ -84,7 +82,7 @@ public class MetadataProperty<T> {
     @ServiceMethod(callByContent = true, target = ServiceMethodContext.TARGET_AUTO)
     public MetadataProperty showPropertyDetail() throws Exception {
         MetadataProperty detailProperty = this;
-        detailProperty.setId("metaDetailView");
+        detailProperty.setId(SelfServiceControlPanel.METADATA_DETAIL_VIEW_ID);
         detailProperty.getMetaworksContext().setWhen(MetaworksContext.WHEN_EDIT);
         detailProperty.getMetaworksContext().setWhere("ssp");
 
@@ -92,8 +90,8 @@ public class MetadataProperty<T> {
     }
 
     @ServiceMethod(callByContent = true)
-    public void save() throws Exception {
-        System.out.println(selfServiceControlPanel);
+    public Object[] save(@AutowiredFromClient SelfServiceControlPanel selfServiceControlPanel) throws Exception {
         selfServiceControlPanel.save(selfServiceControlPanel.getMetadataPropertyList().indexOf(this));
+        return new Object[]{this, new Refresh(selfServiceControlPanel)};
     }
 }

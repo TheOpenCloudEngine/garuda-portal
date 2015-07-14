@@ -22,6 +22,10 @@ import java.util.List;
  */
 public class SelfServiceControlPanel {
 
+    public static final String METADATA_DETAIL_VIEW_ID = "metaDetailView";
+
+    public static final String WHERE_SELF_SERVICE = "ssp";
+
     List<MetadataProperty> metadataPropertyList = new ArrayList<MetadataProperty>();
 
     @Face(faceClass = MetadataPropertyListFace.class)
@@ -106,21 +110,21 @@ public class SelfServiceControlPanel {
         this.setMetadataPropertyList(TenantApp.load(appName).getMetadataPropertyList());
 
         MetadataProperty mp = new MetadataProperty();
-        mp.setId("metaDetailView");
+        mp.setId(METADATA_DETAIL_VIEW_ID);
         mp.setMetaworksContext(new MetaworksContext());
         mp.getMetaworksContext().setHow("hide");
-        mp.getMetaworksContext().setWhere("ssp");
+        mp.getMetaworksContext().setWhere(WHERE_SELF_SERVICE);
         this.setMetadataProperty(mp);
 
         Iterator iterator = this.getMetadataPropertyList().iterator();
         while (iterator.hasNext()) {
             MetadataProperty metadataProperty = (MetadataProperty) iterator.next();
-            metadataProperty.getMetaworksContext().setWhere("ssp");
+            metadataProperty.getMetaworksContext().setWhere(WHERE_SELF_SERVICE);
             metadataProperty.getMetaworksContext().setWhen(MetaworksContext.WHEN_VIEW);
-            if(metadataProperty instanceof FileMetadataProperty){
+            if (metadataProperty instanceof FileMetadataProperty) {
                 ((FileMetadataProperty) metadataProperty).setFilePreview(metadataProperty.getDefaultValue());
                 fileMetadataPropertyList.add(metadataProperty);
-            }else if(metadataProperty instanceof TextMetadataProperty){
+            } else if (metadataProperty instanceof TextMetadataProperty) {
                 textMetadataPropertyList.add(metadataProperty);
             }
         }
@@ -133,28 +137,21 @@ public class SelfServiceControlPanel {
 
     }
 
-    public Refresh save(int index) throws Exception {
+    public void save(int index) throws Exception {
         TenantApp tenantApp = new TenantApp();
         tenantApp.setId(appName);
 
-        this.getMetadataProperty().setId("");
-
         Iterator iterator = this.getMetadataPropertyList().iterator();
-        while(iterator.hasNext()){
-            MetadataProperty mp = (MetadataProperty)iterator.next();
-                if(this.getMetadataProperty().getKey().equals(mp.getKey())){
-                    this.getMetadataPropertyList().remove(mp);
-                    this.getMetadataPropertyList().add(this.getMetadataProperty());
-                    break;
-                }
+        while (iterator.hasNext()) {
+            MetadataProperty mp = (MetadataProperty) iterator.next();
+            if (this.getMetadataProperty().getKey().equals(mp.getKey())) {
+                mp.setDefaultValue(this.getMetadataProperty().getDefaultValue());
+            }
         }
 
         tenantApp.setMetadataPropertyList(metadataPropertyList);
         this.setMetadataPropertyList(metadataPropertyList);
         tenantApp.save();
-
-        return new Refresh(this, true);
-
     }
 }
 

@@ -1,5 +1,6 @@
 <%
 if(value){
+debugger;
 %>
 <div class="sp_center">
     <div class="sp_sub_cate">
@@ -10,15 +11,28 @@ if(value){
 <div class="sp_left">
     <div class="sp_left_con" style="height: 100%">
         <div id="sp_accordion" class="sp_accordion" style="height: 100%">
-            <h3><%=mw3.localize('$ssp.look.feel')%><%if(value.appName){%><span style="width:16px; height:16px; top:5px; position:absolute;margin-left:5px;background-image:url(images/waveStyle/add.png)"><%}%></span></h3>
+            <h3><%=mw3.localize('$ssp.look.feel')%>
+                <%if(value.appName){%>
+                <span style="width:16px; height:16px; top:5px; position:absolute;margin-left:5px;background-image:url(images/waveStyle/add.png)">
+                <%}%>
+                </span>
+            </h3>
             <div>
                 <%=fields.filePropertyPanel.here()%>
                 <%=fields.textPropertyPanel.here()%>
             </div>
-            <h3><%=mw3.localize('$ssp.process')%><%if(value.appName){%><span style="width:16px; height:16px; top:5px; position:absolute;margin-left:5px;background-image:url(images/waveStyle/add.png)"></span><%}%></h3>
+            <h3><%=mw3.localize('$ssp.process')%>
+                <%if(value.appName){%>
+                <span style="width:16px; height:16px; top:5px; position:absolute;margin-left:5px;background-image:url(images/waveStyle/add.png)">
+                </span>
+                <%}%>
+            </h3>
             <div>
             </div>
-            <h3><%=mw3.localize('$ssp.form')%><%if(value.appName){%><span style="width:16px; height:16px; top:5px; position:absolute;margin-left:5px;background-image:url(images/waveStyle/add.png)"></span><%}%></h3>
+            <h3><%=mw3.localize('$ssp.form')%>
+            <%if(value.appName){%><span style="width:16px; height:16px; top:5px; position:absolute;margin-left:5px;background-image:url(images/waveStyle/add.png)">
+            </span><%}%>
+            </h3>
             <div>
             </div>
         </div>
