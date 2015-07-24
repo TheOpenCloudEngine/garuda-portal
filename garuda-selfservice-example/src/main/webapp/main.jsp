@@ -20,9 +20,8 @@
 
         WebApplicationContext appContext =  WebApplicationContextUtils.getWebApplicationContext(srvCtx);
 
-        TenantSpecificUtil tenantSpecificUtil = (TenantSpecificUtil)appContext.getBean("tenantSpecificUtil");
+        Main main = (Main)appContext.getBean("Main");
 
-        String tenantId = TenantContext.getThreadLocalInstance().getTenantId();
     %>
 
     <script type="text/javascript">
@@ -43,10 +42,10 @@
     </button>
 </div>
 
-<img src="<%=tenantSpecificUtil.getIamageURL("companyLogo")%>"
+<img src="<%=main.getCompanyLogoURL()%>"
      class="img-rounded" width="200px" height="100px">
 
-<h1>Company name is <%=tenantSpecificUtil.getMetadata("companyName")%>.</h1>
+<h1>Company name is <%=main.getCompanyName()%>.</h1>
 
 </body>
 </html>
