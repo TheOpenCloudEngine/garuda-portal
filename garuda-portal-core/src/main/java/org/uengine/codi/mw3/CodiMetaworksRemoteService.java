@@ -102,7 +102,7 @@ public class CodiMetaworksRemoteService extends MetaworksRemoteService {
                 Session session = (Session) autowiredFields.get("session");
 
                 if(session.getCompany()!=null){
-//                    new TenantContext(session.getCompany().getComCode());
+                    new TenantContext(session.getCompany().getComCode());
                 }
             }
         }

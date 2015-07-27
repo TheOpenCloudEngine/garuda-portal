@@ -494,11 +494,11 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 
 	@Override
 	public Object editForMetadata() throws Exception {
-		org.uengine.bss.application.TenantApp app = null;
+		org.uengine.bss.application.App app = null;
 		try {
-			app = org.uengine.bss.application.TenantApp.load(getAppName());
+			app = org.uengine.bss.application.App.load(getAppName());
 		} catch (FileNotFoundException e) {
-			app = new org.uengine.bss.application.TenantApp();
+			app = new org.uengine.bss.application.App();
 		}
 		app.setId(getAppName());
 		app.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);

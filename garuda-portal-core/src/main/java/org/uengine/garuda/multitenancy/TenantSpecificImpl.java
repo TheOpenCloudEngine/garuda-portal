@@ -18,6 +18,7 @@ import org.oce.garuda.multitenancy.AppDbRepositorySimple;
 import org.oce.garuda.multitenancy.TenantContext;
 import org.oce.garuda.multitenancy.TenantSpecific;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.uengine.bss.application.App;
 import org.uengine.bss.application.MetadataProperty;
 import org.uengine.bss.application.TenantApp;
 import org.uengine.bss.application.TextMetadataProperty;
@@ -39,7 +40,7 @@ public class TenantSpecificImpl implements TenantSpecific {
         // TODO Auto-generated method stub
         TenantContext tenantContext = new TenantContext(tenantId);
 
-        TenantApp app = null;
+        App app = null;
         try {
             app = TenantApp.load(appKey);
         } catch (FileNotFoundException e) {
