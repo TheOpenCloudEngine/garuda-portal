@@ -8,8 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>garuda-portal-core</artifactId>
-    <packaging>war</packaging>
+    <artifactId>garuda-marketplace</artifactId>
+    <packaging>jar</packaging>
 
     <repositories>
         <repository>
@@ -28,13 +28,6 @@
         <dependency>
             <groupId>org.uengine</groupId>
             <artifactId>processcodi</artifactId>
-            <classifier>classes</classifier>
-            <version>1.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.uengine</groupId>
-            <artifactId>processcodi</artifactId>
             <type>war</type>
             <version>1.1-SNAPSHOT</version>
             <scope>runtime</scope>
@@ -42,11 +35,6 @@
         <dependency>
             <groupId>org.uengine</groupId>
             <artifactId>bss-monetization</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.uengine</groupId>
-            <artifactId>garuda-marketplace</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>garuda-portal-core</module>
+        <module>garuda-marketplace</module>
         <module>garuda-client-example</module>
         <module>bss-monetization</module>
     </modules>

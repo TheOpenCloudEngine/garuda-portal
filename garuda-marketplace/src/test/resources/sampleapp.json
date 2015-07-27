@@ -1,0 +1,92 @@
+{
+    "id": "sampleapp",
+    "name": "Sample Application",
+    "description": "Sample Application helps cloud-centric organizations-organizations that build and manage cloud-facing applications—to solve operational problems faster. Our solution analyzes log data from virtually any application, system, or platform to answer your burning questions:",
+    "planList": [
+        {
+            "id": "Standard",
+            "name": "Standard",
+            "description": "Ideal for early-stage applications with smaller data volumes.\nStarting at 1$/mo\nfor 11GB/day 7-day retention",
+            "type": null,
+            "status": null,
+            "billingInterval": "1",
+            "extend": null,
+            "oneTimeServiceAndRateList": [
+                {
+                    "serviceId": "Setup",
+                    "price": 0,
+                    "unitOfMeasure": "",
+                    "contractDuration": "1"
+                }
+            ],
+            "recurringServiceAndRateList": [
+                {
+                    "serviceId": "Basic",
+                    "price": 0.5,
+                    "unitOfMeasure": "",
+                    "contractDuration": "1",
+                    "quota": 5,
+                    "overagePrice": 0.2
+                }
+            ],
+            "usageServiceAndRateList": [],
+            "supplimentalFields": null
+        },
+        {
+            "id": "Enterprise",
+            "name": "Enterprise",
+            "description": "Ideal for advance-stage applications with large data volumes.\nStarting at $1/mo\nfor 1GB/day 7-day retention",
+            "type": null,
+            "status": null,
+            "billingInterval": "1",
+            "extend": null,
+            "oneTimeServiceAndRateList": [
+                {
+                    "serviceId": "Setup",
+                    "price": 0,
+                    "unitOfMeasure": "",
+                    "contractDuration": "1"
+                }
+            ],
+            "recurringServiceAndRateList": [
+                {
+                    "serviceId": "Basic",
+                    "price": 1,
+                    "unitOfMeasure": "",
+                    "contractDuration": "1",
+                    "quota": 10,
+                    "overagePrice": 0.2
+                }
+            ],
+            "usageServiceAndRateList": [
+                {
+                    "serviceId": "Advance",
+                    "price": 0.2,
+                    "unitOfMeasure": "",
+                    "contractDuration": "1",
+                    "minQuantity": 0,
+                    "maxQuantity": 0
+                }
+            ],
+            "supplimentalFields": null
+        }
+    ],
+    "serviceList": [
+        {
+            "id": "Setup",
+            "name": "Setup",
+            "description": "We provides setting an application and fast provisioning"
+        },
+        {
+            "id": "Basic",
+            "name": "Basic",
+            "description": "Calculate a minimum path price from one to another"
+        },
+        {
+            "id": "Advance",
+            "name": "Advance",
+            "description": "Calculate a minimum path price from one to many others"
+        }
+    ],
+    "metadataPropertyList": []
+}
