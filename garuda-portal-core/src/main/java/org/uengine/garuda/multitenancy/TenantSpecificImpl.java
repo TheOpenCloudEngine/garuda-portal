@@ -4,6 +4,7 @@ package org.uengine.garuda.multitenancy;
  * Created by hoo.lim on 7/5/2015.
  */
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,10 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import org.codehaus.janino.CompileException;
+import org.codehaus.janino.Parser;
+import org.codehaus.janino.Scanner;
+import org.codehaus.janino.ScriptEvaluator;
 import org.metaworks.spring.SpringConnectionFactory;
 import org.oce.garuda.multitenancy.AppDbRepositorySimple;
 import org.oce.garuda.multitenancy.TenantContext;
@@ -56,6 +61,32 @@ public class TenantSpecificImpl implements TenantSpecific {
         }
 
         return null;
+    }
+
+    @WebMethod(action = "runRule")
+    public String runRule(@WebParam String tenantId, @WebParam String appKey, @WebParam String ruleKey, @WebParam String[] parameters) {
+        String ruleString = getMetadata(tenantId, appKey, ruleKey);
+
+        String[] parameterNames = new String[parameters.length];
+        Class[] parameterTypes = new Class[parameters.length];
+        for(int i=0; i<parameters.length; i++){
+            parameterNames[i] = "arg" + (i+1);
+            parameterTypes[i] = String.class;
+        }
+
+        ScriptEvaluator se = null;
+        try {
+            se = new ScriptEvaluator(ruleString, Object.class, parameterNames, parameterTypes);
+
+            return se.evaluate(parameters).toString();
+
+        } catch (Exception e){
+
+            return e.toString();
+
+        }
+
+
     }
 
     @Override
