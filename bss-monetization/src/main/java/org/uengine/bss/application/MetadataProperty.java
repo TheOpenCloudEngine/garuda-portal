@@ -37,8 +37,8 @@ public class MetadataProperty<T> {
     String type;
 
     @Range(
-            options = {"Text", "File"},
-            values = {"Text", "File"}
+            options = {"Text", "File", "Code(Rule)", "Process"},
+            values = {"Text", "File", "Java", "Process"}
     )
     @Order(3)
     public String getType() {
