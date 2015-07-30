@@ -17,8 +17,6 @@ import org.metaworks.website.MetaworksFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.uengine.codi.ITool;
 import org.uengine.codi.mw3.admin.PageNavigator;
-import org.uengine.codi.mw3.knowledge.IWfNode;
-import org.uengine.codi.mw3.knowledge.WfNode;
 import org.uengine.codi.mw3.marketplace.category.Category;
 import org.uengine.codi.mw3.marketplace.category.ICategory;
 import org.uengine.codi.mw3.model.InstanceViewContent;

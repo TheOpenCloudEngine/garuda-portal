@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" import="org.oce.garuda.multitenancy.*,org.springframework.web.context.*" %>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@ page import="sample.Main" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -27,7 +28,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#selfService").click(function () {
-                window.open("<%=tenantSpecificUtil.getSelfServicePortalURL() %>",'Self Service','height=900,width=900');
+                window.open("<%=main.getSelfServicePortalURL() %>",'Self Service','height=900,width=900');
             });
 
         });

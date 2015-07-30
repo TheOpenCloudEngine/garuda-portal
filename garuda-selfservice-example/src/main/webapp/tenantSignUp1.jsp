@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="org.oce.garuda.multitenancy.*,org.springframework.web.context.*" %>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@ page import="sample.Main" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -22,13 +23,13 @@ function subscribe(element){
 
 		WebApplicationContext appContext =  WebApplicationContextUtils.getWebApplicationContext(srvCtx);
 
-		TenantSpecificUtil tenantSpecificUtil = (TenantSpecificUtil)appContext.getBean("tenantSpecificUtil");
+		Main main = (Main)appContext.getBean("main");
 
 %>
 $(document).ready(function() {
 	// 플랜 목록 가져오기
 	$.ajax({
-		url  : 'http://<%=tenantSpecificUtil.getMetadataServer()%>/services/app/<%=tenantSpecificUtil.getAppKey()%>/plan',
+		url  : '<%=main.getAppSubscribePlanURL()%>',
 		type : 'GET',
 		async: false,
 		cache: false,

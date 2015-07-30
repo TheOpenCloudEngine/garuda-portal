@@ -1,9 +1,6 @@
 package org.uengine.bss;
 
-import org.uengine.bss.application.FileMetadataProperty;
-import org.uengine.bss.application.MetadataFile;
-import org.uengine.bss.application.MetadataProperty;
-import org.uengine.bss.application.TenantApp;
+import org.uengine.bss.application.*;
 
 import javax.imageio.ImageIO;
 import javax.jws.WebService;
@@ -23,22 +20,23 @@ import java.util.Objects;
  */
 public class MetadataImageServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
         File imageFile = null;
 
         String[] pathSplitArray = request.getPathInfo().split("/");
         if (pathSplitArray.length > 2) {
             String appId = pathSplitArray[1];
             String metadataKey = pathSplitArray[2];
-            TenantApp app = TenantApp.load(appId);
+            App app = TenantApp.load(appId);
 
             for (MetadataProperty metadataProperty : app.getMetadataPropertyList()) {
                 if (metadataProperty instanceof FileMetadataProperty && Objects.equals(metadataKey, metadataProperty.getKey())) {
                     MetadataFile metadataFile = (MetadataFile) metadataProperty.getDefaultValue();
                     String fileName = metadataFile.getUploadedPath();
-                    imageFile = TenantApp.getFileOfGarudaApp(appId, TenantApp.getTenantId(), fileName);
+
+                    imageFile = new File(TenantApp.getResourcePath(appId,fileName));
                     if (!imageFile.exists()) {
-                        imageFile = TenantApp.getDefaultFileOfGarudaApp(appId, fileName);
+                        imageFile = new File(App.getResourcePath(appId,fileName));
                         response.setContentType(metadataFile.getMimeType());
                     }
                     break;

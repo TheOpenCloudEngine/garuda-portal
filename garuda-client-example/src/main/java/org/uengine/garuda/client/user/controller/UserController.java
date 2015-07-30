@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import org.uengine.garuda.client.user.entity.User;
-import org.uengine.garuda.client.user.rest.client.MetadataServiceClient;
 import org.uengine.garuda.client.user.service.UserService;
 
 @RequestMapping("/user")

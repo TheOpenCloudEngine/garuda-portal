@@ -494,6 +494,7 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 
 	@Override
 	public Object editForMetadata() throws Exception {
+
 		org.uengine.bss.application.App app = null;
 		try {
 			app = org.uengine.bss.application.App.load(getAppName());

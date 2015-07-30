@@ -1,19 +1,29 @@
 package org.uengine.bss.application;
 
+import com.thoughtworks.xstream.XStream;
 import org.metaworks.ContextAware;
 import org.metaworks.MetaworksContext;
+import org.metaworks.Remover;
+import org.metaworks.ServiceMethodContext;
 import org.metaworks.annotation.*;
+import org.metaworks.dao.TransactionContext;
+import org.metaworks.widget.ModalWindow;
 import org.uengine.bss.monetization.*;
 import org.uengine.bss.monetization.face.PlanListFace;
 import org.uengine.bss.monetization.face.ServiceListFace;
+import org.uengine.codi.mw3.resource.ResourceManager;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 //@Face(ejsPath="dwr/metaworks/genericfaces/ElementFace.ejs")
 public class App implements ContextAware{
+	protected final static String UENGINE_METADATA_FILE = "uengine.metadata";
 
 	transient MetaworksContext metaworksContext;
+
 	public MetaworksContext getMetaworksContext() {
 		if(metaworksContext==null){
 			metaworksContext = new MetaworksContext();
@@ -29,67 +39,67 @@ public class App implements ContextAware{
 	@Id
 	@NonEditable
 	@Group(name="Basic")
-		public String getId() {
-			return id;
-		}
-		public void setId(String id) {
-			this.id = id;
-		}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String name;
 	@Order(2)
 	@Group(name="Basic")
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String description;
 	@Order(3)
 	@Group(name="Basic")
-		public String getDescription() {
-			return description;
-		}
-		public void setDescription(String description) {
-			this.description = description;
-		}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public List<Plan> planList = new ArrayList<Plan>();
-		@Face(faceClass = PlanListFace.class)
-		@Order(5)
-		@Group(name="Plan")
-		public List<Plan> getPlanList() {
-			return planList;
-		}
-		public void setPlanList(List<Plan> planList) {
-			this.planList = planList;
-		}
+	@Face(faceClass = PlanListFace.class)
+	@Order(5)
+	@Group(name="Plan")
+	public List<Plan> getPlanList() {
+		return planList;
+	}
+	public void setPlanList(List<Plan> planList) {
+		this.planList = planList;
+	}
 
 
 	public List<Service> serviceList = new ArrayList<Service>();
-		@Face(faceClass = ServiceListFace.class)
-		@Order(4)
-		@Group(name="Service")
-		public List<Service> getServiceList() {
-			return serviceList;
-		}
-		public void setServiceList(List<Service> serviceList) {
-			this.serviceList = serviceList;
-		}
+	@Face(faceClass = ServiceListFace.class)
+	@Order(4)
+	@Group(name="Service")
+	public List<Service> getServiceList() {
+		return serviceList;
+	}
+	public void setServiceList(List<Service> serviceList) {
+		this.serviceList = serviceList;
+	}
 
 
 	List<MetadataProperty> metadataPropertyList = new ArrayList<MetadataProperty>();
-		@Face(faceClass = MetadataPropertyListFace.class)
-		@Order(5)
-		@Group(name="MetadataProperty")
-		public List<MetadataProperty> getMetadataPropertyList() {
-			return metadataPropertyList;
-		}
-		public void setMetadataPropertyList(List<MetadataProperty> metadataPropertyList) {
-			this.metadataPropertyList = metadataPropertyList;
-		}
+	@Face(faceClass = MetadataPropertyListFace.class)
+	@Order(5)
+	@Group(name="MetadataProperty")
+	public List<MetadataProperty> getMetadataPropertyList() {
+		return metadataPropertyList;
+	}
+	public void setMetadataPropertyList(List<MetadataProperty> metadataPropertyList) {
+		this.metadataPropertyList = metadataPropertyList;
+	}
 
 //	@ServiceMethod(callByContent = true, target= ServiceMethodContext.TARGET_POPUP)
 //	public static Invoice createInvoice(){
@@ -118,5 +128,93 @@ public class App implements ContextAware{
 		}
 
 		return null;
+	}
+
+	@ServiceMethod(callByContent = true)
+	public Object save() throws FileNotFoundException {
+		XStream xstream = new XStream();
+		xstream.autodetectAnnotations(true);
+		xstream.toXML(this, System.out);
+
+		for(MetadataProperty metadataProperty : getMetadataPropertyList()){
+			if(metadataProperty instanceof FileMetadataProperty){
+				try {
+					((FileMetadataProperty) metadataProperty).upload(getResourcePath(getId(),null));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		try {
+			xstream.toXML(this, new OutputStreamWriter(getResourceAsOutputStream(getId(), UENGINE_METADATA_FILE),
+					"utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}finally {
+
+		}
+
+		return new Remover(new ModalWindow());
+	}
+
+	@ServiceMethod(target= ServiceMethodContext.TARGET_SELF)
+	public static App load(@Payload("id") String appId) throws FileNotFoundException {
+		XStream xstream = new XStream();
+		xstream.autodetectAnnotations(true);
+
+		App app = null;
+		try {
+			app = (App) xstream.fromXML(new InputStreamReader(getResourceAsStream(appId, UENGINE_METADATA_FILE),
+                    StandardCharsets.UTF_8));
+		} catch (Exception e) {
+			throw new FileNotFoundException("Uengine metadata file is not existed!");
+		}
+
+		// Init Plan service information.
+		List<Service> serviceList = app.getServiceList();
+		List<Plan> planList = app.getPlanList();
+		for (Service service : serviceList) {
+			for (Plan plan : planList) {
+				if(plan.getOneTimeServiceAndRateList() != null) {
+					for (OneTimeServiceAndRate serviceAndRate : plan.getOneTimeServiceAndRateList()) {
+						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
+							serviceAndRate.setService(service);
+						}
+					}
+				}
+				if(plan.getRecurringServiceAndRateList() != null) {
+					for (RecurringServiceAndRate serviceAndRate : plan.getRecurringServiceAndRateList()) {
+						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
+							serviceAndRate.setService(service);
+						}
+					}
+				}
+				if(plan.getUsageServiceAndRateList() != null) {
+					for (UsageServiceAndRate serviceAndRate : plan.getUsageServiceAndRateList()) {
+						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
+							serviceAndRate.setService(service);
+						}
+					}
+				}
+			}
+		}
+
+		if(TransactionContext.getThreadLocalInstance()!=null)
+			TransactionContext.getThreadLocalInstance().setSharedContext("app", app);
+
+		return app;
+	}
+
+	public static String getResourcePath(String appKey, String alias){
+		return ResourceManager.getResourcePath(appKey, null, alias);
+	}
+
+	public OutputStream getResourceAsOutputStream(String appKey, String alias) throws FileNotFoundException {
+		return ResourceManager.getAppResourceAsOutputStream(appKey, alias);
+	}
+
+	public static InputStream getResourceAsStream(String appKey, String alias) throws Exception {
+		return ResourceManager.getAppResourceAsStream(appKey, alias);
 	}
 }

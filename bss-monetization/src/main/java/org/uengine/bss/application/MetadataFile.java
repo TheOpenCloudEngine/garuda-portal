@@ -11,28 +11,18 @@ import java.io.IOException;
  */
 public class MetadataFile extends MetaworksFile{
 
-    String appId;
+    String resourcePath;
 
-    public String getAppId() {
-        return appId;
+    public String getResourcePath() {
+        return resourcePath;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    String tenantId;
-
-    public String getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(String tenantId) {
-        this.tenantId = tenantId;
+    public void setResourcePath(String resourcePath) {
+        this.resourcePath = resourcePath;
     }
 
     @Override
     public String overrideUploadPathPrefix() {
-        return TenantApp.getGarudaAppPath(getAppId(),getTenantId());
+        return getResourcePath();
     }
 }

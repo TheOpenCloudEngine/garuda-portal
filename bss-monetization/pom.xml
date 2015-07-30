@@ -157,7 +157,6 @@
 			<version>${cxf.version}</version>
 		</dependency>
 
-
         <dependency>
             <groupId>org.uengine</groupId>
             <artifactId>uengine-core</artifactId>
@@ -174,6 +173,14 @@
             <groupId>org.uengine.cloud.garuda</groupId>
             <artifactId>garuda-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.uengine</groupId>
+            <artifactId>processcodi</artifactId>
+            <classifier>classes</classifier>
+            <version>1.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

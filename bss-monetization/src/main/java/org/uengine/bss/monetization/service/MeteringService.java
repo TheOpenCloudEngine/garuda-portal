@@ -175,7 +175,7 @@ public class MeteringService {
                 String[] keys = e.getKey().split(":");
                 String appId = keys[0];
 
-                TenantApp app = TenantApp.load(appId);
+                App app = TenantApp.load(appId);
                 Map<String, Map<String, ServiceAndRate>> planServiceAndRateMap = appPlanMap.get(appId);
                 if(planServiceAndRateMap == null) {
                     planServiceAndRateMap = getPlanMap(app);

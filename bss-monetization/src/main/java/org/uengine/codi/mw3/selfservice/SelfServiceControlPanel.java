@@ -138,7 +138,7 @@ public class SelfServiceControlPanel {
     }
 
     public void save(int index) throws Exception {
-        TenantApp tenantApp = TenantApp.load(appName);
+        App tenantApp = TenantApp.load(appName);
 
         Iterator iterator = this.getMetadataPropertyList().iterator();
         while (iterator.hasNext()) {

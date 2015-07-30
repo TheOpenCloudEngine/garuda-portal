@@ -36,12 +36,11 @@ public class FileMetadataProperty extends MetadataProperty<MetadataFile> {
         super.setDefaultValue(defaultValue);
     }
 
-    public void upload(String appId, String tenantId) throws Exception {
+    public void upload(String resourcePath) throws Exception {
         if(getDefaultValue().getFileTransfer() != null){
 //        if(getDefaultValue().getUploadedPath() == null ||
 //                (getDefaultValue().getUploadedPath() != null && getDefaultValue().getDeletedPath() != null)){
-            getDefaultValue().setAppId(appId);
-            getDefaultValue().setTenantId(tenantId);
+            getDefaultValue().setResourcePath(resourcePath);
             getDefaultValue().upload();
         }
     }

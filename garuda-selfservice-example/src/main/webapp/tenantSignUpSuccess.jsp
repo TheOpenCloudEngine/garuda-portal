@@ -16,12 +16,6 @@
 <body>
 
 <%
-	ServletContext srvCtx = request.getServletContext();
-
-	WebApplicationContext appContext =  WebApplicationContextUtils.getWebApplicationContext(srvCtx);
-
-	TenantSpecificUtil tenantSpecificUtil = (TenantSpecificUtil)appContext.getBean("tenantSpecificUtil");
-
 	String tenantId = (String)request.getParameter("tenantId");
 %>
 

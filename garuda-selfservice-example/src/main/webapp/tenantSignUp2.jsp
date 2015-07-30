@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" import="org.oce.garuda.multitenancy.*,org.springframework.web.context.*" %>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@ page import="sample.Main" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -18,8 +19,7 @@
 
         WebApplicationContext appContext = WebApplicationContextUtils.getWebApplicationContext(srvCtx);
 
-        TenantSpecificUtil tenantSpecificUtil = (TenantSpecificUtil) appContext.getBean("tenantSpecificUtil");
-
+        Main main = (Main)appContext.getBean("main");
     %>
 
     <script type="text/javascript">
@@ -29,7 +29,7 @@
                     alert("Passwords are different!");
                 } else {
                     $.ajax({
-                        url: 'http://<%=tenantSpecificUtil.getMetadataServer()%>/services/tenant/signUp',
+                        url: '<%=main.getTenantSignupURL()%>',
                         type: 'POST',
                         cache: false,
                         dataType: 'text',

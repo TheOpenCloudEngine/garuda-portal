@@ -52,7 +52,7 @@ public class BillingService {
         List<String> planIdList = appMappingMapper.select(appId, accountId);
         String planId = planIdList.get(0);
         // appId + accountId로 plan을 가져온다.
-		TenantApp app = TenantApp.load(appId);
+		App app = TenantApp.load(appId);
         Plan plan = null;
         List<Plan> planList = app.getPlanList();
         if(planList != null) {
@@ -89,7 +89,7 @@ public class BillingService {
         List<String> planIdList = appMappingMapper.select(appId, accountId);
         String planId = planIdList.get(0);
 		// appId + accountId로 plan을 가져온다.
-		TenantApp app = TenantApp.load(appId);
+		App app = TenantApp.load(appId);
 		Plan plan = null;
 		List<Plan> planList = app.getPlanList();
 		if(planList != null) {
@@ -134,7 +134,7 @@ public class BillingService {
 		List<String> planIdList = appMappingMapper.select(appId, accountId);
 		String planId = planIdList.get(0);
 		// appId + accountId로 plan을 가져온다.
-		TenantApp app = TenantApp.load(appId);
+		App app = TenantApp.load(appId);
 		Plan plan = null;
 		List<Plan> planList = app.getPlanList();
 		if(planList != null) {

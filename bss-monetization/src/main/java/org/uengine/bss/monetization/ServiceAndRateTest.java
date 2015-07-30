@@ -5,6 +5,7 @@ import org.uengine.bss.application.App;
 import org.uengine.bss.application.TenantApp;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,9 +17,9 @@ public class ServiceAndRateTest {
 	String appId = "sampleapp";
 
     @Test
-    public void calculateStandard() throws FileNotFoundException {
+    public void calculateStandard() throws IOException {
 
-        TenantApp app = TenantApp.load(appId);
+        App app = TenantApp.load(appId);
         List<Plan> planList = app.getPlanList();
 
         /**
@@ -51,9 +52,9 @@ public class ServiceAndRateTest {
     }
 
     @Test
-    public void calculateEnterprise() throws FileNotFoundException {
+    public void calculateEnterprise() throws IOException {
 
-        TenantApp app = TenantApp.load(appId);
+        App app = TenantApp.load(appId);
         List<Plan> planList = app.getPlanList();
 
         /**
