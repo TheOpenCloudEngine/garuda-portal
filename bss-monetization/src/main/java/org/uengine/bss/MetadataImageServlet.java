@@ -34,11 +34,12 @@ public class MetadataImageServlet extends HttpServlet {
                     MetadataFile metadataFile = (MetadataFile) metadataProperty.getDefaultValue();
                     String fileName = metadataFile.getUploadedPath();
 
-                    imageFile = new File(TenantApp.getResourcePath(appId,fileName));
-                    if (!imageFile.exists()) {
-                        imageFile = new File(App.getResourcePath(appId,fileName));
-                        response.setContentType(metadataFile.getMimeType());
-                    }
+                    //TODO: refactoring required - not to use Path directly, change to use ResourceManager.getStorage()
+//                    imageFile = new File(TenantApp.getResourcePath(appId,fileName));
+//                    if (!imageFile.exists()) {
+//                        imageFile = new File(App.getResourcePath(appId,fileName));
+//                        response.setContentType(metadataFile.getMimeType());
+//                    }
                     break;
                 }
             }

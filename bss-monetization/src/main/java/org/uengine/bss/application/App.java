@@ -7,11 +7,15 @@ import org.metaworks.Remover;
 import org.metaworks.ServiceMethodContext;
 import org.metaworks.annotation.*;
 import org.metaworks.dao.TransactionContext;
+import org.metaworks.dwr.MetaworksRemoteService;
 import org.metaworks.widget.ModalWindow;
+import org.oce.garuda.multitenancy.Operation;
+import org.oce.garuda.multitenancy.TenantContext;
 import org.uengine.bss.monetization.*;
 import org.uengine.bss.monetization.face.PlanListFace;
 import org.uengine.bss.monetization.face.ServiceListFace;
-import org.uengine.codi.mw3.resource.ResourceManager;
+import org.uengine.modeling.resource.DefaultResource;
+import org.uengine.modeling.resource.ResourceManager;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -137,13 +141,15 @@ public class App implements ContextAware{
 		xstream.toXML(this, System.out);
 
 		for(MetadataProperty metadataProperty : getMetadataPropertyList()){
-			if(metadataProperty instanceof FileMetadataProperty){
-				try {
-					((FileMetadataProperty) metadataProperty).upload(getResourcePath(getId(),null));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+
+//TODO: should be enabled sometime
+//			if(metadataProperty instanceof FileMetadataProperty){
+//				try {
+//					((FileMetadataProperty) metadataProperty).upload(getResourcePath(getId(),null));
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
 		}
 
 		try {
@@ -206,15 +212,68 @@ public class App implements ContextAware{
 		return app;
 	}
 
-	public static String getResourcePath(String appKey, String alias){
-		return ResourceManager.getResourcePath(appKey, null, alias);
+	protected OutputStream getResourceAsOutputStream(final String appKey, final String alias) throws FileNotFoundException {
+
+		return
+
+				(OutputStream)
+
+						TenantContext.nonTenantSpecificOperation(new Operation() {
+							@Override
+							public Object run() {
+								try {
+									return _getResourceAsOutputStream(appKey, alias);
+								} catch (FileNotFoundException e) {
+									throw new RuntimeException(e);
+								}
+							}
+						});
+
 	}
 
-	public OutputStream getResourceAsOutputStream(String appKey, String alias) throws FileNotFoundException {
-		return ResourceManager.getAppResourceAsOutputStream(appKey, alias);
+	protected static InputStream getResourceAsStream(final String appKey, final String alias) throws Exception {
+		return
+
+				(InputStream)
+
+						TenantContext.nonTenantSpecificOperation(new Operation() {
+							@Override
+							public Object run() {
+								try {
+									return _getResourceAsStream(appKey, alias);
+								} catch (Exception e) {
+									throw new RuntimeException(e);
+								}
+							}
+						});
 	}
 
-	public static InputStream getResourceAsStream(String appKey, String alias) throws Exception {
-		return ResourceManager.getAppResourceAsStream(appKey, alias);
+
+
+	protected OutputStream _getResourceAsOutputStream(String appKey, String alias) throws FileNotFoundException {
+		ResourceManager resourceManager = MetaworksRemoteService.getComponent(ResourceManager.class);
+
+		DefaultResource resource = new DefaultResource();
+		resource.setPath(appKey + "/" + alias);
+
+		try {
+
+			return resourceManager.getStorage().getOutputStream(resource);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected static InputStream _getResourceAsStream(String appKey, String alias) throws Exception {
+		ResourceManager resourceManager = MetaworksRemoteService.getComponent(ResourceManager.class);
+
+		DefaultResource resource = new DefaultResource();
+		resource.setPath(appKey + "/" + alias);
+
+		try {
+			return resourceManager.getStorage().getInputStream(resource);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
