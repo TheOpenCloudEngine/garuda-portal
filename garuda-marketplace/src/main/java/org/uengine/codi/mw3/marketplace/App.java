@@ -210,6 +210,7 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 		public void setProjectId(String projectId) {
 			this.projectId = projectId;
 		}
+
 	IAppMapping appMapping;
 		public IAppMapping getAppMapping() {
 			return appMapping;
@@ -647,7 +648,7 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 	}
 
 	@ServiceMethod(callByContent=true)
-	public Object[] addApp()throws Exception {
+	public Object[] addApp() throws Exception {
 
 //		App app = new App();
 //		app.setAppId(this.getAppId());
@@ -702,7 +703,10 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 		AppMapping am = new AppMapping();
 		am.setAppId(this.getAppId());
 		am.setAppName(this.getAppName());
-		am.setComCode(this.getComcode());
+
+
+
+		am.setComCode(session.getCompany().getComCode());
 		String url=null;
 		String reopsitoryService = GlobalContext.getPropertyString("file.repository.service");
 		url = GlobalContext.getPropertyString("app.url.prod")+projectName;

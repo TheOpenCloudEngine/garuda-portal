@@ -11,7 +11,7 @@
     <modules>
         <module>garuda-portal-core</module>
         <module>garuda-marketplace</module>
-        <module>garuda-client-example</module>
+        <module>garuda-selfservice-example</module>
         <module>bss-monetization</module>
     </modules>
 

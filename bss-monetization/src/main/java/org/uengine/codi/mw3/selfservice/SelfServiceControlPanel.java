@@ -41,33 +41,56 @@ public class SelfServiceControlPanel {
 
     List<MetadataProperty> fileMetadataPropertyList = new ArrayList<MetadataProperty>();
 
-    public List<MetadataProperty> getFileMetadataPropertyList() {
-        return fileMetadataPropertyList;
-    }
+        public List<MetadataProperty> getFileMetadataPropertyList() {
+            return fileMetadataPropertyList;
+        }
 
-    public void setFileMetadataPropertyList(List<MetadataProperty> fileMetadataPropertyList) {
-        this.fileMetadataPropertyList = fileMetadataPropertyList;
-    }
+        public void setFileMetadataPropertyList(List<MetadataProperty> fileMetadataPropertyList) {
+            this.fileMetadataPropertyList = fileMetadataPropertyList;
+        }
 
     List<MetadataProperty> textMetadataPropertyList = new ArrayList<MetadataProperty>();
 
-    public List<MetadataProperty> getTextMetadataPropertyList() {
-        return textMetadataPropertyList;
-    }
+        public List<MetadataProperty> getTextMetadataPropertyList() {
+            return textMetadataPropertyList;
+        }
 
-    public void setTextMetadataPropertyList(List<MetadataProperty> textMetadataPropertyList) {
-        this.textMetadataPropertyList = textMetadataPropertyList;
-    }
+        public void setTextMetadataPropertyList(List<MetadataProperty> textMetadataPropertyList) {
+            this.textMetadataPropertyList = textMetadataPropertyList;
+        }
+
+    List<MetadataProperty> javaMetadataPropertyList = new ArrayList<MetadataProperty>();
+        public List<MetadataProperty> getJavaMetadataPropertyList() {
+            return javaMetadataPropertyList;
+        }
+        public void setJavaMetadataPropertyList(List<MetadataProperty> javaMetadataPropertyList) {
+            this.javaMetadataPropertyList = javaMetadataPropertyList;
+        }
+
+
+    List<MetadataProperty> processMetadataPropertyList = new ArrayList<MetadataProperty>();
+        public List<MetadataProperty> getProcessMetadataPropertyList() {
+            return processMetadataPropertyList;
+        }
+        public void setProcessMetadataPropertyList(List<MetadataProperty> processMetadataPropertyList) {
+            this.processMetadataPropertyList = processMetadataPropertyList;
+        }
+
+
+
+
+
+
 
     MetadataProperty metadataProperty;
 
-    public MetadataProperty getMetadataProperty() {
-        return metadataProperty;
-    }
+        public MetadataProperty getMetadataProperty() {
+            return metadataProperty;
+        }
 
-    public void setMetadataProperty(MetadataProperty metadataProperty) {
-        this.metadataProperty = metadataProperty;
-    }
+        public void setMetadataProperty(MetadataProperty metadataProperty) {
+            this.metadataProperty = metadataProperty;
+        }
 
     FilePropertyPanel filePropertyPanel;
 
@@ -88,6 +111,18 @@ public class SelfServiceControlPanel {
     public void setTextPropertyPanel(TextPropertyPanel textPropertyPanel) {
         this.textPropertyPanel = textPropertyPanel;
     }
+
+    TextPropertyPanel javaPropertyPanel;
+        public TextPropertyPanel getJavaPropertyPanel() {
+            return javaPropertyPanel;
+        }
+
+        public void setJavaPropertyPanel(TextPropertyPanel javaPropertyPanel) {
+            this.javaPropertyPanel = javaPropertyPanel;
+        }
+
+
+
 
     String appName;
 
@@ -126,6 +161,8 @@ public class SelfServiceControlPanel {
                 fileMetadataPropertyList.add(metadataProperty);
             } else if (metadataProperty instanceof TextMetadataProperty) {
                 textMetadataPropertyList.add(metadataProperty);
+            } else if (metadataProperty instanceof JavaMetadataProperty) {
+                javaMetadataPropertyList.add(metadataProperty);
             }
         }
 
@@ -134,6 +171,9 @@ public class SelfServiceControlPanel {
 
         TextPropertyPanel textPropertyPanel = new TextPropertyPanel(textMetadataPropertyList);
         this.setTextPropertyPanel(textPropertyPanel);
+
+        TextPropertyPanel javaPropertyPanel = new TextPropertyPanel(javaMetadataPropertyList);
+        this.setJavaPropertyPanel(javaPropertyPanel);
 
     }
 

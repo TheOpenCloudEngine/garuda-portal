@@ -32,8 +32,9 @@ import org.uengine.codi.mw3.model.ICompany;
 		"{how: 'myVendor', face: 'dwr/metaworks/org/uengine/codi/mw3/marketplace/IApp.ejs'}",
 		"{where: 'mapList', face: 'dwr/metaworks/org/uengine/codi/mw3/marketplace/IAppMap.ejs'}"
 	  },
-      options={"fieldOrder"},
-      values={"categories,appName,appTypePanel,simpleOverview,fullOverview,logoFile,metadataPropertyListFace"})
+	      options={"fieldOrder"},
+	      values={"categories,appName,appTypePanel,projectId,simpleOverview,fullOverview,logoFile,metadataPropertyListFace"}
+)
 public interface IApp extends IDAO{
 	
 	public static final String APP_TYPE_PROJECT = "project";
@@ -45,19 +46,18 @@ public interface IApp extends IDAO{
 	public void setAppId(int appId);
 
 	@Name
-	@Face(displayName="$App.Name", options={"size"}, values={"131"})
+	@Face(options={"size"}, values={"131"})
 	public String getAppName();
 	public void setAppName(String appName);
 	
-	@Face(displayName = "$App.Overview.Simple", ejsPath = "dwr/metaworks/genericfaces/richText.ejs", options={"rows", "cols"}, values = {"5", "130"})
+	@Face(ejsPath = "dwr/metaworks/genericfaces/richText.ejs", options={"rows", "cols"}, values = {"5", "130"})
 	public String getSimpleOverview();
 	public void setSimpleOverview(String simpleOverview);
 
-	@Face(displayName = "$App.Overview.Full", ejsPath = "dwr/metaworks/genericfaces/richText.ejs", options={"rows", "cols"}, values = {"7", "130"})
+	@Face(ejsPath = "dwr/metaworks/genericfaces/richText.ejs", options={"rows", "cols"}, values = {"7", "130"})
 	public String getFullOverview();
 	public void setFullOverview(String fullOverview);
 
-	@Face(displayName = "$App.Pricing")
 	public String getPricing();
 	public void setPricing(String pricing);
 
@@ -96,7 +96,6 @@ public interface IApp extends IDAO{
 	public String getAppType();
 	public void setAppType(String appType);
 
-	@Face(displayName="$App.LogoFileAttach")
 	@ORMapping(
 		databaseFields={"logoContent", "logoFileName"}, 
 		objectFields={"uploadedPath", "filename"}
@@ -111,13 +110,11 @@ public interface IApp extends IDAO{
 	public ICategory getCategory();
 	public void setCategory(ICategory category);
 	
-	@Face(displayName = "$App.Category")
 	@NonLoadable
 	@NonSavable
 	public SelectBox getCategories();
 	public void setCategories(SelectBox categories);
 
-	@Face(displayName="$App.AppType")
 	@NonLoadable
 	@NonSavable
 	public AppTypePanel getAppTypePanel();
@@ -148,7 +145,6 @@ public interface IApp extends IDAO{
 	public void setRunningVersion(int runningVersion);	
 	
 	
-	@Face(displayName = "$SubDomainName", options={"size"}, values={"131"})
 	public String getSubDomain();
 	public void setSubDomain(String subDomain);
 	

@@ -29,4 +29,8 @@ public class Main{
   public String getCompanyLogoURL(){
     return tenantSpecificUtil.getIamageURL("companyLogo");
   }
+
+  public String callRule(String parameter) {
+    return tenantSpecificUtil.runRule("calculatePrice", new String[]{parameter});
+  }
 }

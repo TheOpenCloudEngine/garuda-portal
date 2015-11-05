@@ -7,7 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 
-    <title>Self Service Screen</title>
+    <title>Call Rule Result</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
@@ -23,35 +23,17 @@
 
         Main main = (Main)appContext.getBean(Main.class);
 
+        String argument1 = request.getParameter("argument1");
+
+        String result = main.callRule(argument1);
     %>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#selfService").click(function () {
-                window.open("<%=main.getSelfServicePortalURL() %>",'Self Service','height=900,width=900');
-            });
 
-        });
-    </script>
 </head>
 <body>
 
 
-<div class="text-right">
-    <button type="button" class="btn btn-primary btn-lg" id="selfService">
-        Self Service
-    </button>
-</div>
-
-<img src="<%=main.getCompanyLogoURL()%>"
-     class="img-rounded" width="200px" height="100px">
-
-
-<form action="callRule.jsp">
-    <li>argument 1</li> <input name="argument1">
-</form>
-
-<h1>Company name is <%=main.getCompanyName()%>.</h1>
+<h1>Result is <%=result%>.</h1>
 
 </body>
 </html>

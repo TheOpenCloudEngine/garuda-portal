@@ -41,7 +41,7 @@
 
 	<jaxws:client id="tenantSpecificClient"
 				  serviceClass="org.oce.garuda.multitenancy.TenantSpecific"
-				  address="${service.domain}/tenantImage/TenantSpecific" />
+				  address="http://localhost/TenantSpecific" transportId="8080"/>
 
 	<bean id="tenantSpecificUtil" class="org.oce.garuda.multitenancy.TenantSpecificUtil">
 		<property name="appKey" value="${service.appId}" />

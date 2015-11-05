@@ -14,6 +14,7 @@ import org.oce.garuda.multitenancy.TenantContext;
 import org.uengine.bss.monetization.*;
 import org.uengine.bss.monetization.face.PlanListFace;
 import org.uengine.bss.monetization.face.ServiceListFace;
+import org.uengine.kernel.NeedArrangementToSerialize;
 import org.uengine.modeling.resource.DefaultResource;
 import org.uengine.modeling.resource.ResourceManager;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Face(ejsPath="dwr/metaworks/genericfaces/ElementFace.ejs")
-public class App implements ContextAware{
+public class App implements ContextAware, NeedArrangementToSerialize{
 	protected final static String UENGINE_METADATA_FILE = "uengine.metadata";
 
 	transient MetaworksContext metaworksContext;
@@ -140,17 +141,8 @@ public class App implements ContextAware{
 		xstream.autodetectAnnotations(true);
 		xstream.toXML(this, System.out);
 
-		for(MetadataProperty metadataProperty : getMetadataPropertyList()){
+		beforeSerialization();
 
-//TODO: should be enabled sometime
-//			if(metadataProperty instanceof FileMetadataProperty){
-//				try {
-//					((FileMetadataProperty) metadataProperty).upload(getResourcePath(getId(),null));
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-		}
 
 		try {
 			xstream.toXML(this, new OutputStreamWriter(getResourceAsOutputStream(getId(), UENGINE_METADATA_FILE),
@@ -177,34 +169,9 @@ public class App implements ContextAware{
 			throw new FileNotFoundException("Uengine metadata file is not existed!");
 		}
 
-		// Init Plan service information.
-		List<Service> serviceList = app.getServiceList();
-		List<Plan> planList = app.getPlanList();
-		for (Service service : serviceList) {
-			for (Plan plan : planList) {
-				if(plan.getOneTimeServiceAndRateList() != null) {
-					for (OneTimeServiceAndRate serviceAndRate : plan.getOneTimeServiceAndRateList()) {
-						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
-							serviceAndRate.setService(service);
-						}
-					}
-				}
-				if(plan.getRecurringServiceAndRateList() != null) {
-					for (RecurringServiceAndRate serviceAndRate : plan.getRecurringServiceAndRateList()) {
-						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
-							serviceAndRate.setService(service);
-						}
-					}
-				}
-				if(plan.getUsageServiceAndRateList() != null) {
-					for (UsageServiceAndRate serviceAndRate : plan.getUsageServiceAndRateList()) {
-						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
-							serviceAndRate.setService(service);
-						}
-					}
-				}
-			}
-		}
+		app.afterDeserialization();
+
+
 
 		if(TransactionContext.getThreadLocalInstance()!=null)
 			TransactionContext.getThreadLocalInstance().setSharedContext("app", app);
@@ -275,5 +242,58 @@ public class App implements ContextAware{
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public void beforeSerialization() {
+
+		for(MetadataProperty metadataProperty : getMetadataPropertyList()){
+
+			if(metadataProperty instanceof NeedArrangementToSerialize){
+				((NeedArrangementToSerialize) metadataProperty).beforeSerialization();
+			}
+		}
+	}
+
+	@Override
+	public void afterDeserialization() {
+
+
+		// Init Plan service information.
+		List<Service> serviceList = getServiceList();
+		List<Plan> planList = getPlanList();
+		for (Service service : serviceList) {
+			for (Plan plan : planList) {
+				if(plan.getOneTimeServiceAndRateList() != null) {
+					for (OneTimeServiceAndRate serviceAndRate : plan.getOneTimeServiceAndRateList()) {
+						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
+							serviceAndRate.setService(service);
+						}
+					}
+				}
+				if(plan.getRecurringServiceAndRateList() != null) {
+					for (RecurringServiceAndRate serviceAndRate : plan.getRecurringServiceAndRateList()) {
+						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
+							serviceAndRate.setService(service);
+						}
+					}
+				}
+				if(plan.getUsageServiceAndRateList() != null) {
+					for (UsageServiceAndRate serviceAndRate : plan.getUsageServiceAndRateList()) {
+						if (serviceAndRate != null && serviceAndRate.getService().getId().equals(service.getId())) {
+							serviceAndRate.setService(service);
+						}
+					}
+				}
+			}
+		}
+
+		for(MetadataProperty metadataProperty : getMetadataPropertyList()){
+
+			if(metadataProperty instanceof NeedArrangementToSerialize){
+				((NeedArrangementToSerialize) metadataProperty).afterDeserialization();
+			}
+		}
+
 	}
 }

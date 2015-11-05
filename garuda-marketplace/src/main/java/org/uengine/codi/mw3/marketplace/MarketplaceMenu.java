@@ -4,10 +4,13 @@ import org.metaworks.MetaworksContext;
 import org.metaworks.ServiceMethodContext;
 import org.metaworks.annotation.AutowiredFromClient;
 import org.metaworks.annotation.ServiceMethod;
+import org.metaworks.dwr.MetaworksRemoteService;
 import org.metaworks.widget.ModalPanel;
 import org.metaworks.widget.ModalWindow;
 import org.uengine.bss.application.MetadataPropertyListFace;
 import org.uengine.codi.mw3.model.Session;
+
+import static org.metaworks.dwr.MetaworksRemoteService.*;
 
 public class MarketplaceMenu {
 	
@@ -16,8 +19,9 @@ public class MarketplaceMenu {
 
 	@ServiceMethod(target=ServiceMethodContext.TARGET_POPUP)
 	public Object registerApp() throws Exception {
-		App app = new App();
-		app.session = session;
+		App app = getComponent(App.class);
+		autowire(app);
+
 		app.load();
 		app.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);
 		

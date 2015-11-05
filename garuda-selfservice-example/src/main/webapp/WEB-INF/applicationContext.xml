@@ -11,15 +11,16 @@
     <context:annotation-config/>
 
     <bean id="metadataServer" class="java.lang.String">
-        <constructor-arg value="oce-live.com"/>
+        <constructor-arg value="localhost:8080"/>
     </bean>
 
     <jaxws:client id="tenantSpecificClient"
                   serviceClass="org.oce.garuda.multitenancy.TenantSpecific"
-                  address="#{'http://' + metadataServer + '/services/TenantSpecific'}" />
+                  address="#{'http://' + metadataServer + '/services/TenantSpecific'}"
+            />
 
     <bean id="tenantSpecificUtil" class="org.oce.garuda.multitenancy.TenantSpecificUtil">
-        <property name="appKey" value="HelloApp" />
+        <property name="appKey" value="Scrum" />
         <property name="tenantSpecific" ref="tenantSpecificClient" />
         <property name="metadataServer" ref="metadataServer"/>
     </bean>
