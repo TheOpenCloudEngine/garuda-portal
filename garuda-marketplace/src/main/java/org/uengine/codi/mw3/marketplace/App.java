@@ -543,7 +543,7 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 		category.setCategoryId(Integer.parseInt(categories.getSelected()));
 		this.setCategory(category);
 
-		String appType = this.getAppTypePanel().getSelectedAppType();
+		String appType = "process";//this.getAppTypePanel().getSelectedAppType();
 		this.setAppType(appType);
 
 		// 파일이 변경이 되어있지 않다면 변경을 안한다.
@@ -556,7 +556,7 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 
 		if(MetaworksContext.WHEN_NEW.equals(this.getMetaworksContext().getWhen())){
 
-			projectAnalysis(this.getAppTypePanel().getProjectId(), appType);
+			//projectAnalysis(this.getAppTypePanel().getProjectId(), appType);
 
 //			appProject.setName(this.getAppName());
 //			appProject.setProjectAlias(this.getSubDomain());
@@ -584,7 +584,8 @@ public class App extends Database<IApp> implements IApp, ITool, ContextAware {
 			this.setComName(session.getCompany().getComName());
 			this.setSubDomain(this.getSubDomain());
 //			this.setRunningVersion(Integer.parseInt(this.getReleaseVersion().getSelected()));
-			this.setProjectId(this.getAppTypePanel().getProjectId());
+
+			this.setProjectId("");
 			this.setStatus(STATUS_APPROVED);
 			this.setLogoFile(logoFile);
 
