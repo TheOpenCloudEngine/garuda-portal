@@ -1,7 +1,8 @@
 <%
 	if(value){
 %>
-<%=value.categoryName%>
+<div onclick="<%=methods.selectCategory.caller()%>"><%=value.categoryName%></div>
+
 <%
 	}
 %>

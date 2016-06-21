@@ -28,14 +28,14 @@
 		}else if(mw3.how == 'detail'){
 %>
 
-        <div> 
+        <>
             <ul class="mp_sub_lst_type">
                 <li>
                     <div class="mp_sub_pic">
                     	<%=fields.logoFile.here({when:'image', htmlAttr:{style:'width: 150px; height: 150px; border:1px solid #ccc; background:url(images/waveStyle/bg_thmb.gif) center no-repeat;'}})%>
                     </div>
                     <% if(!value.companyUsed){ %>
-                    <div class="mp_sub_buybtn"><img  alt="" src="images/marketPlace/buyBtn.jpg" onClick="<%=methods.addApp.caller()%>"></div>
+                    <button type="button" class="btn-primary" onClick="<%=methods.addApp.caller()%>">BUY(free)</button>
                     <% }%>
                     <div class="mp_sub_rightBox">
                     	<dl class="mp_sub_dsc1">

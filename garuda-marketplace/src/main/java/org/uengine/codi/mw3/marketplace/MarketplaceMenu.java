@@ -25,7 +25,7 @@ public class MarketplaceMenu {
 		app.load();
 		app.getMetaworksContext().setWhen(MetaworksContext.WHEN_NEW);
 		
-		return new ModalWindow(new ModalPanel(app), 1050, 550, "앱 등록");
+		return new ModalWindow(new ModalPanel(app), 1050, 550, "$RegisterAnApp");
 	}
 
 	@ServiceMethod(target=ServiceMethodContext.TARGET_POPUP)
@@ -33,6 +33,6 @@ public class MarketplaceMenu {
 		MyVendor myVendor = new MyVendor();
 		myVendor.load(session);
 		
-		return new ModalWindow(new ModalPanel(myVendor), 0, 0, "앱 관리");
+		return new ModalWindow(new ModalPanel(myVendor), 0, 0, "$ManageApps");
 	}
 }
