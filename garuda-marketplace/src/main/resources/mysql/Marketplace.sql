@@ -1,58 +1,58 @@
-create table APP(
-	APPID int(11) NOT NULL,
-	APPNAME varchar(100),
-	SIMPLEOVERVIEW varchar(1000),
-	FULLOVERVIEW varchar(5000),
-	PRICING varchar(200),
-	CREATEDATE datetime DEFAULT NULL,
-	UPDATEDATE datetime DEFAULT NULL,
-	VERSION varchar(5),
-	EXTFILENAME varchar(200),
-	FILECONTENT varchar(1000),
-	LOGOFILENAME varchar(200),
-	LOGOCONTENT varchar(1000),
-	STATUS varchar(100),	-- request, approval/reject, published/unpublished
+create table app(
+	appid int(11) not null,
+	appname varchar(100),
+	simpleoverview varchar(1000),
+	fulloverview varchar(5000),
+	pricing varchar(200),
+	createdate datetime default null,
+	updatedate datetime default null,
+	version varchar(5),
+	extfilename varchar(200),
+	filecontent varchar(1000),
+	logofilename varchar(200),
+	logocontent varchar(1000),
+	status varchar(100),	-- request, approval/reject, published/unpublished
 	comcode varchar(20),
-	CATEGORYID int(11),
-	INSTALLCNT int(11) DEFAULT 0,
-	ISDELETED int(11) DEFAULT false,
+	categoryid int(11),
+	installcnt int(11) default 0,
+	isdeleted int(11) default false,
 	url varchar(200),
-	projectId varchar(20),
+	projectid varchar(20),
 	comname varchar(200),
-	runningVersion int,
-	subDomain varchar(50),
-	appType varchar(20) DEFAULT 'project',
-	PRIMARY KEY(APPID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	runningversion int,
+	subdomain varchar(50),
+	apptype varchar(20) default 'project',
+	primary key(appid)
+) engine=innodb default charset=utf8;
 
 
-create table APPMAPPING(
-	APPID int(11) NOT NULL,
-	COMCODE  varchar(20) NOT NULL,
-	APPNAME varchar(100),
-	ISDELETED int(11) DEFAULT false,
+create table appmapping(
+	appid int(11) not null,
+	comcode  varchar(20) not null,
+	appname varchar(100),
+	isdeleted int(11) default false,
 	url varchar(200),
-	appType varchar(20),
-	planId varchar(20) DEFAULT null,
-	effectiveDate datetime DEFAULT null,
-	expirationDate datetime DEFAULT null,
-	isTrial int(11) DEFAULT 0,
-	PRIMARY KEY(APPID, COMCODE),
-	FOREIGN KEY (APPID) REFERENCES APP (APPID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	apptype varchar(20),
+	planid varchar(20) default null,
+	effectivedate datetime default null,
+	expirationdate datetime default null,
+	istrial int(11) default 0,
+	primary key(appid, comcode),
+	foreign key (appid) references app (appid)
+) engine=innodb default charset=utf8;
 
-CREATE TABLE `category` (
-  `categoryId` int(11) DEFAULT NULL,
-  `categoryName` varchar(255) DEFAULT NULL,
-  `parentCategoryId` int(11) DEFAULT NULL,
-  `modDate` datetime DEFAULT NULL,
-  `deleted` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table `category` (
+  `categoryid` int(11) default null,
+  `categoryname` varchar(255) default null,
+  `parentcategoryid` int(11) default null,
+  `moddate` datetime default null,
+  `deleted` int(11) default '0'
+) engine=innodb default charset=utf8;
 
-INSERT INTO `category` VALUES
-	(0,'전체',-1,NULL,0),
-	(1,'인사/급여',-1,NULL,0),
-	(2,'영업 관리',-1,NULL,0),
-	(3,'생산 관리',-1,NULL,0),
-	(4,'설비 관리',-1,NULL,0),
-	(5,'구매 관리',-1,NULL,0);
+insert into `category` values
+	(0,'전체',-1,null,0),
+	(1,'인사/급여',-1,null,0),
+	(2,'영업 관리',-1,null,0),
+	(3,'생산 관리',-1,null,0),
+	(4,'설비 관리',-1,null,0),
+	(5,'구매 관리',-1,null,0);
